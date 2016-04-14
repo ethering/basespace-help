@@ -27,16 +27,15 @@ Run the following command:
 
 ####Ubuntu:
 
-    wget https://bintray.com/artifact/download/basespace/BaseSpaceCLI-DEB/pool/main/s/stable/basespace-cli_0.6-295_amd64.deb
-    # need to run this twice - once to get dependencies for apt-get to install and then again to install it
-    dpkg -i basespace-cli_0.6-295_amd64.deb
-    apt-get -fy install 
-    dpkg -i basespace-cli_0.6-295_amd64.deb
+    sudo echo "deb https://basespace.bintray.com/BaseSpaceCLI-DEB trusty main" | tee /etc/apt/sources.list.d/basespace-cli.list
+    sudo apt-get -y --force-yes install apt-transport-https
+    sudo apt-get update
+    sudo apt-get -y --force-yes install basespace-cli
 
 ####CentOS:
 
-    wget https://bintray.com/artifact/download/basespace/BaseSpaceCLI-RPM/basespace-cli-0.6-295.x86_64.rpm
-    yum install -y basespace-cli-0.6-295.x86_64.rpm
+    sudo curl https://bintray.com/basespace/BaseSpaceCLI-RPM/rpm -o /etc/yum.repos.d/basespace-cli.repo
+    sudo yum install -y basespace-cli
 
 ####MacOS (Yosemite and El Capitan)
 
