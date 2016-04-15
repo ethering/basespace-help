@@ -1,12 +1,12 @@
 ---
 layout: article
-title: BaseSpace Command Line Interface
+title: BaseSpace Hub Command Line Interface
 ---
 
 ##Overview
-The main mechanism to interact with your BaseSpace data is via the website at [www.basespace.illumina.com](https://basespace.illumina.com). However, for some use-cases, it can be useful to work with the same data using the Linux command line interface (CLI).
+The main mechanism to interact with your BaseSpace Hub data is via the website at [www.basespace.illumina.com](https://basespace.illumina.com). However, for some use-cases, it can be useful to work with the same data using the Linux command line interface (CLI).
 
-With BaseMount, we introduced a way to mount your BaseSpace files and explore them on the command line as if they were a file system. Now, we are taking this a step further by introducing a suite of tools, BaseSpace Command Line Interface (BaseSpaceCLI) to both read data from your BaseSpace account and create new data, by uploading samples and launching apps. These tools integrate with BaseMount and provide a way to carry out many routine BaseSpace tasks efficiently at the command line.
+With BaseMount, we introduced a way to mount your BaseSpace Hub files and explore them on the command line as if they were a file system. Now, we are taking this a step further by introducing a suite of tools, BaseSpace Hub Command Line Interface (BaseSpaceCLI) to both read data from your BaseSpace Hub account and create new data, by uploading samples and launching apps. These tools integrate with BaseMount and provide a way to carry out many routine BaseSpace Hub tasks efficiently at the command line.
 
 ##System Requirements
 Supported Operating Systems:
@@ -27,16 +27,15 @@ Run the following command:
 
 ####Ubuntu:
 
-    wget https://bintray.com/artifact/download/basespace/BaseSpaceCLI-DEB/pool/main/s/stable/basespace-cli_0.6-295_amd64.deb
-    # need to run this twice - once to get dependencies for apt-get to install and then again to install it
-    dpkg -i basespace-cli_0.6-295_amd64.deb
-    apt-get -fy install 
-    dpkg -i basespace-cli_0.6-295_amd64.deb
+    sudo echo "deb https://basespace.bintray.com/BaseSpaceCLI-DEB trusty main" | tee /etc/apt/sources.list.d/basespace-cli.list
+    sudo apt-get -y --force-yes install apt-transport-https
+    sudo apt-get update
+    sudo apt-get -y --force-yes install basespace-cli
 
 ####CentOS:
 
-    wget https://bintray.com/artifact/download/basespace/BaseSpaceCLI-RPM/basespace-cli-0.6-295.x86_64.rpm
-    yum install -y basespace-cli-0.6-295.x86_64.rpm
+    sudo curl https://bintray.com/basespace/BaseSpaceCLI-RPM/rpm -o /etc/yum.repos.d/basespace-cli.repo
+    sudo yum install -y basespace-cli
 
 ####MacOS (Yosemite and El Capitan)
 
@@ -53,9 +52,9 @@ The tarball used for the Mac installation should work on any Unix platform that 
 As well as this documentation, there are also [video demos](https://www.youtube.com/playlist?list=PLLCJ4-FhlRM6gc19h6GZCRXkNNqYe2N8_) of BaseSpaceCLI functionality.
 
 ##Authentication
-Before the CLI tools can be used, an authentication token must be obtained from BaseSpace. This token will be used each time the CLI tools contact the BaseSpace API. If you have already used BaseMount, a token will already be present that can also be used by BaseSpaceCLI and you can skip this step.
+Before the CLI tools can be used, an authentication token must be obtained from BaseSpace Hub . This token will be used each time the CLI tools contact the BaseSpace Hub API. If you have already used BaseMount, a token will already be present that can also be used by BaseSpaceCLI and you can skip this step.
 
-To authenticate, type bs authenticate at the terminal. BaseSpaceCLI supplies you with a URL. Copy and paste this URL into your web browser and login to BaseSpace as normal. Then click the "Accept" button to allow the CLI to access your BaseSpace account. Once you click accept, the word "success!" should appear in your terminal to show your BaseSpaceCLI account is now authenticated.
+To authenticate, type bs authenticate at the terminal. BaseSpaceCLI supplies you with a URL. Copy and paste this URL into your web browser and login to BaseSpace Hub as normal. Then click the "Accept" button to allow the CLI to access your BaseSpace Hub account. Once you click accept, the word "success!" should appear in your terminal to show your BaseSpaceCLI account is now authenticated.
 
     $ bs authenticate
     please authenticate here: https://basespace.illumina.com/oauth/device?code=XXXXX
@@ -70,13 +69,13 @@ Unlike BaseMount, BaseSpaceCLI does not support access token encryption. This wo
 BaseSpace needed a platform update to support the generation of access tokens which permit app launch. If you have an older access token, such as one generated when BaseMount was originally released, this token may give an error message if you try to launch an app with the CLI. In this case, you should delete your access token (rm ~/.basespace/default.cfg) and reauthenticate.
 {% endcallout %}
 
-You can also authenticate against an alternative BaseSpace instance (e.g. a BaseSpace Onsite System) using the --api-server option:
+You can also authenticate against an alternative BaseSpace  instance (e.g. a BaseSpace  Onsite System) using the --api-server option:
 
     $ bs --config hoth authenticate --api-server https://api.cloud-hoth.illumina.com/
     # use "bs --config hoth" for successive commands to make use of this token
 
 ##Wrapping
-All the BaseSpace CLI tools can be accessed through a single command: bs. This command uses the same model as git and similar tools to access the underlying functionality, so in place of `git push`, `git pull`, `git commit`, the BaseSpace CLI has `bs launch`, `bs list`, `bs upload` and so on.
+All the BaseSpace  CLI tools can be accessed through a single command: bs. This command uses the same model as git and similar tools to access the underlying functionality, so in place of `git push`, `git pull`, `git commit`, the BaseSpace CLI has `bs launch`, `bs list`, `bs upload` and so on.
 
 ###Usage and available commands
 To see a usage/help message and the tools that can be executed through bs, run it with the --help option:
