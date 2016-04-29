@@ -1,6 +1,6 @@
 ---
 layout: article
-title: Overview of Runs in BaseSpace Hub
+title: Overview of Runs in BaseSpace Sequence Hub
 hide_welcome_banner: true
 ---
 -----------------------
