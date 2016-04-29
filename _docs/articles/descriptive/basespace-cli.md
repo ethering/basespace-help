@@ -1,12 +1,12 @@
 ---
 layout: article
-title: BaseSpace Hub Command Line Interface
+title: BaseSpace Sequence Hub Command Line Interface
 ---
 
 ##Overview
-The main mechanism to interact with your BaseSpace Hub data is via the website at [www.basespace.illumina.com](https://basespace.illumina.com). However, for some use-cases, it can be useful to work with the same data using the Linux command line interface (CLI).
+The main mechanism to interact with your BaseSpace Sequence Hub data is via the website at [www.basespace.illumina.com](https://basespace.illumina.com). However, for some use-cases, it can be useful to work with the same data using the Linux command line interface (CLI).
 
-With BaseMount, we introduced a way to mount your BaseSpace Hub files and explore them on the command line as if they were a file system. Now, we are taking this a step further by introducing a suite of tools, BaseSpace Hub Command Line Interface (BaseSpaceCLI) to both read data from your BaseSpace Hub account and create new data, by uploading samples and launching apps. These tools integrate with BaseMount and provide a way to carry out many routine BaseSpace Hub tasks efficiently at the command line.
+With BaseMount, we introduced a way to mount your BaseSpace Sequence Hub files and explore them on the command line as if they were a file system. Now, we are taking this a step further by introducing a suite of tools, BaseSpace Sequence Hub Command Line Interface (BaseSpaceCLI) to both read data from your BaseSpace Hub account and create new data, by uploading samples and launching apps. These tools integrate with BaseMount and provide a way to carry out many routine BaseSpace Sequence Hub tasks efficiently at the command line.
 
 ##System Requirements
 Supported Operating Systems:
@@ -53,9 +53,9 @@ The tarball used for the Mac installation should work on any Unix platform that 
 As well as this documentation, there are also [video demos](https://www.youtube.com/playlist?list=PLLCJ4-FhlRM6gc19h6GZCRXkNNqYe2N8_) of BaseSpaceCLI functionality.
 
 ##Authentication
-Before the CLI tools can be used, an authentication token must be obtained from BaseSpace Hub . This token will be used each time the CLI tools contact the BaseSpace Hub API. If you have already used BaseMount, a token will already be present that can also be used by BaseSpaceCLI and you can skip this step.
+Before the CLI tools can be used, an authentication token must be obtained from BaseSpace Sequence Hub . This token will be used each time the CLI tools contact the BaseSpace Sequence Hub API. If you have already used BaseMount, a token will already be present that can also be used by BaseSpaceCLI and you can skip this step.
 
-To authenticate, type bs authenticate at the terminal. BaseSpaceCLI supplies you with a URL. Copy and paste this URL into your web browser and login to BaseSpace Hub as normal. Then click the "Accept" button to allow the CLI to access your BaseSpace Hub account. Once you click accept, the word "success!" should appear in your terminal to show your BaseSpaceCLI account is now authenticated.
+To authenticate, type bs authenticate at the terminal. BaseSpaceCLI supplies you with a URL. Copy and paste this URL into your web browser and login to BaseSpace Sequence Hub as normal. Then click the "Accept" button to allow the CLI to access your BaseSpace Sequence Hub account. Once you click accept, the word "success!" should appear in your terminal to show your BaseSpaceCLI account is now authenticated.
 
     $ bs authenticate
     please authenticate here: https://basespace.illumina.com/oauth/device?code=XXXXX
