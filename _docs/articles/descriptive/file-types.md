@@ -1,9 +1,9 @@
 ---
 layout: article
-title: Basespace Hub File types
+title: Basespace Sequence Hub File types
 ---
 
-BaseSpace Hub uses and produces various files. See the topics in this section for details.
+BaseSpace Sequence Hub uses and produces various files. See the topics in this section for details.
 
 - [Sample Sheet](/articles/descriptive/sample-sheet/)
 - [BAM Files](/articles/descriptive/bam-files/)
