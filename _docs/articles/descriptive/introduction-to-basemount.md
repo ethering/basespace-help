@@ -12,11 +12,12 @@ title: Introduction To BaseMount
  - [Tutorial Videos](#TutorialVideos)
  - [Installation](#Installation)
  - [Using BaseMount](#Mounting)
-    - [Mounting, Authentication, Unmounting](#Mounting)
+    - [Mounting, Authenticating, Unmounting](#Mounting)
     - [Directory Structure](#DirectoryStructure)
     - [Downloading Data](#DownloadingData)
     - [Writing and Uploading data](#WriteMode)
-    - [The basemount-cmd tool](#BasemountCmd)
+    - [Deleting data](#DeletingData)
+ - [The basemount-cmd tool](#BasemountCmd)
  - [Appendix 1: BSFS plugin](#AppendixBsfsPlugin)
  - [Troubleshooting](#Troubleshooting)
  - [FAQ](#FAQ)
@@ -236,7 +237,7 @@ This script works on both Ubuntu and CentOS. It adds BaseSpace Sequence Hub pack
     echo "# Packages by Illumina BaseSpace" | sudo tee ${FILE}
     echo "deb https://dl.bintray.com/basespace/BaseMount-DEB saucy main" | sudo tee -a ${FILE}
     
-    # Import BaseSpace GPG key
+    # Import BaseSpace Sequence Hub GPG key
     curl https://bintray.com/user/downloadSubjectPublicKey?username=basespace | sudo apt-key add -
     
     # Refresh db and install BaseMount
@@ -257,7 +258,7 @@ This script works on both Ubuntu and CentOS. It adds BaseSpace Sequence Hub pack
     echo "gpgcheck=1" | sudo tee -a ${FILE}
     echo "enabled=1" | sudo tee -a ${FILE}
     
-    # Import BaseSpace GPG key
+    # Import BaseSpace Sequence Hub GPG key
     sudo rpm --import https://bintray.com/user/downloadSubjectPublicKey?username=basespace
     
     # Install BaseMount
@@ -401,6 +402,7 @@ A mount point's root directory contains the following entries:
 
  - **Runs**      : sub-directory containing the runs to which the user has access
  - **Projects**  : sub-directory containing the projects
+ - **.Trash**    : sub-directory containing the user's trash
  - **README**
  - **.basemount**: special directory, which shows and controls the configuration of the current BaseMount instance. This directory is accessible from anywhere in the BaseMount filesystem (even though we make it visible by `ls` only at the top level).
  - **.commands** : special file used by `basemount-cmd`
@@ -534,7 +536,7 @@ Failing that, fast threads may get blocked by slow threads when the cache become
 
 Two timeouts are in place:
 
-- A fixed speed-based timeout, when less than 1000 bytes are received in any 30-second window, to catch rare occurrences of broken connections to the S3 object store. The 30-second timeout is here to restart downloading the affected blocks on those occasions.
+- A speed-based timeout, when less than 1000 bytes are received in any 30-second window, to catch rare occurrences of broken connections to the S3 object store. The 30-second timeout is here to restart downloading the affected blocks on those occasions.
 
 - A fixed timeout of 300 seconds: when a block takes longer than this to be downloaded, BaseMount stops and resumes its download. This is intended to catch unexpected bandwidth throttling problems where one download thread becomes much slower than the other ones.
 
@@ -550,7 +552,7 @@ The Troubleshooting sections on timeout contain useful advice.
 
 #### Validation
 
-Unfortunately, the data downloaded from BaseSpace is not currently validated (for example using MD5 sums). We hope to implement this soon, but for the moment, any data corruption occurring during download may go through BaseMount undetected.
+Unfortunately, the data downloaded from BaseSpace Sequence Hub is not currently validated (for example using MD5 sums). We hope to implement this soon, but for the moment, any data corruption occurring during download may go through BaseMount undetected.
 
 
 ### BSFS plugin
@@ -604,7 +606,7 @@ This brings in the following 3 major and 2 minor features:
 Access tokens obtained through authentication are created with a specific set of scopes.  
 Starting with version 0.11, the "CREATE GLOBAL" scope is requested.  
 If you authenticated with an older version of BaseMount, your stored access token may not contain the scope needed for write-mode.  
-To solve this, you need to delete your current configuration (by using `basemount --remove-config [--config=<config>]`) and run BaseMount again to re-authenticate.
+To fix this, you need to delete your current configuration (by using `basemount --remove-config [--config=<config>]`) and run BaseMount again to re-authenticate.
 
 
 ### Creation of new BaseSpace Sequence Hub entities
@@ -688,12 +690,62 @@ If you wish to choose a different name to organise your workspace more effective
 
 
 
+<a name="DeletingData"></a>
+
+## Deleting data
+
+Starting with version 0.14, BaseMount can move data to&from the trash.
+
+
+### Warning about access token scopes
+
+Access tokens obtained through authentication are created with a specific set of scopes.  
+Starting with version 0.14, the "MOVETOTRASH GLOBAL" scope is requested.  
+If you authenticated with an older version of BaseMount, your stored access token may not contain the scope needed for write-mode.  
+To fix this, you need to delete your current configuration (by using `basemount --remove-config [--config=<config>]`) and run BaseMount again to re-authenticate.
+
+
+### Move to trash
+
+You can delete any BaseSpace Sequence Hub entity using either of these two methods:
+
+1. Cd into the entity's parent directory and run `rmdir <entity name>`.  
+In case of error (e.g. lack of permissions, app still running, etc.), the entity won't be deleted, and the error message will be added to the `.error` file in the current directory.
+
+2. Cd into the entity's directory and run `basemount-cmd move-to-trash`.  
+In case of error, the tool will report the error and exit with error code 1.  
+Warning: In case of success, the current directory will become invalid, as the entity will have been deleted.
+
+
+### Restore from trash
+
+The hidden directory `<mount point>/.Trash` contains the list of items stored in your trash.  
+In order to restore one of these items, enter its directory, and run `basemount-cmd restore-from-trash`.  
+
+Warning: The current directory will become invalid, as the entity won't be in the trash anymore.
+
+
+### Protection against `rm -rf`
+
+Don't use `rm -rf` to delete a BaseSpace Sequence Hub entity.  
+As a safeguard, any attempt to delete an invalid item (such as the Projects directory or a .json file) blocks any other deletion for 5 seconds. As `rm -rf` usually starts with such invalid items, it should block itself before deleting any data.
+
+
+### Emptying the trash
+
+We keep this feature hard to access to prevent an accidental loss of data.  
+In order to do so, you will need an access token with the "EMPTY TRASH" scope (obtainable using our `bscli auth` tool), and you will need to issue the DELETE v1pre3/users/current/trash API call yourself (for example with `curl`).
+
+Please contact our support team if needed.
+
+
+
 <a name="BasemountCmd"></a>
 
 ## The basemount-cmd tool
 
 Running `basemount-cmd` displays the list of available commands.
-This list of commands will vary, based on your current directory, for example `mark-as-complete` is only valid for incomplete AppResults.
+This list of commands will vary based on your current directory, for example `mark-as-complete` only appears for AppResults that are not yet in status==Complete, whereas the `refresh` command appears in most directories.
 
 
 The `basemount-cmd` tool was introduced to:
@@ -716,15 +768,25 @@ Typing `basemount-cmd <TAB><TAB>` displays the list of available commands.
 Running `basemount-cmd` without arguments also shows a description for each command.
 
 
-### List of commands by entity
-
- - Projects/{project-name}/AppResults/{appresult-name}: mark-as-complete
- - Projects/{project-name}/Samples/{sample-name}: mark-as-complete
-
-
 ### Description of commands
 
- - mark-as-complete: Finalize and switch (sample or appresult) to read-only. Change the state of the associated appsession to Complete.
+ - **refresh**: Refresh this directory and sub-directories  
+   *Available in: all entities and lists thereof*
+
+ - **move-to-trash**: Delete current entity (Warning: current directory will become invalid)  
+   *Available in: project, run, sample, appresult and appsession entities*
+
+ - **move-files-only-to-trash**: Delete files from Data directory, preserves metadata  
+   *Available in: run entities*
+
+ - **restore-from-trash**: Restore entity to main account - Warning: current directory disappears  
+   *Available in: .Trash/{entity-name} directories*
+
+ - **mark-as-complete**: Finalize and switch (sample or appresult) to read-only. Change the state of the associated appsession to Complete  
+   *Available in: sample and appresult entities*
+
+ - **unmount**: Force unmount. Warning: the current directory will become invalid  
+   *Available in: top level directory*
 
 
 Note: Commands that are not listed here are "use at your own risk", and may disappear in future versions (well... those listed here may disappear as well anyway... it's an alpha release after all).
@@ -738,9 +800,8 @@ Note: Commands that are not listed here are "use at your own risk", and may disa
 Each new directory access made by BaseMount relies on the local FUSE device (/dev/fuse), the BaseSpace Sequence Hub API and the user's credentials. This mechanism means that, as currently available, BaseMount does not support the following types of accesses:
 
 - Cluster access, where many compute nodes can access the files. FUSE-mounted filesystems are per-host and cannot be accessed from other hosts without additional infrastructure.
-- BaseMount doesn't refresh files or directories. In order to reflect changes done via the Web GUI in your command line tree, you currently need to unmount (`basemount --unmount <mountpoint>`) and restart BaseMount.
 - In general, lots of concurrent requests can cause stability issues on a resource-constrained system.  Keep in mind, this is an early release and stability will increase.
-- If you have terabytes of data in BaseSpace Sequence Hub, doing a "find" command or recursive "ls" or recursive "grep" on the mount is not recommended: it is likely to start consuming many GB of RAM and crash when the RAM runs out. Yes, we'll handle this better soon!
+- If you have terabytes of data in BaseSpace, doing a "find" command or recursive "ls" or recursive "grep" on the mount is not recommended: it is likely to start consuming many GB of RAM and crash when the RAM runs out. Yes, we'll handle this better soon!
 
 
 
@@ -760,7 +821,7 @@ The BSFS plugin is a high performance FUSE-based plugin for BaseMount.
     echo "# Packages by Illumina BaseSpace" | sudo tee ${FILE}
     echo "deb https://dl.bintray.com/basespace/BaseSpaceFS-DEB saucy main" | sudo tee -a ${FILE}
     
-    # Import BaseSpace GPG key
+    # Import BaseSpace Sequence Hub GPG key
     curl https://bintray.com/user/downloadSubjectPublicKey?username=basespace | sudo apt-key add -
     
     # Refresh db and install BSFS
@@ -778,7 +839,7 @@ The BSFS plugin is a high performance FUSE-based plugin for BaseMount.
     echo "gpgcheck=1" | sudo tee -a ${FILE}
     echo "enabled=1" | sudo tee -a ${FILE}
     
-    # Import BaseSpace GPG key
+    # Import BaseSpace Sequence Hub GPG key
     sudo rpm --import https://bintray.com/user/downloadSubjectPublicKey?username=basespace
     
     # Install BSFS
@@ -812,49 +873,49 @@ There are currently three caching methods implemented in BSFS as described below
 
 **SparseFile**: This mode is used in EC2 instances, where the cache path is on an XFS file system. If this mode is specified and the cache path is not on XFS, then BlockFile mode will be used automatically. Ejection of blocks from cache will use the hole-punching feature of XFS.
 
-	LruCacheMode = SparseFile
+	cacheMode = SparseFile
 
 **BlockFile**: This mode can be used with any file system. In this mode, each file-block is represented as a separate file in the cache folder. If lots of blocks are being accessed, then the number of open file limit (ulimit -n) of the OS will be reached. Therefore it is recommended to increase this value to more than 20,000.
 
-	LruCacheMode = BlockFile
+	cacheMode = BlockFile
 
 **RamBuffer** (default): In this mode, the cached data is kept in RAM, and not on disk. You should ensure the cache size limit fits in your available RAM, and adjust your block size to have enough blocks if you plan to access multiple files in parallel.
 
-	LruCacheMode = RamBuffer
+	cacheMode = RamBuffer
 
 #### Prefetch Strategy
 
 **NextBlock** (default): In addition to the block(s) containing the current request the "next block" in sequence is also fetched. In our production EC2 instances, this mode is used.
 
-	PrefetchStrategy = NextBlock
+	prefetchStrategy = NextBlock
 
 **OnDemand**: Only the block(s) containing the current read request is fetched, i.e. pre-fetching of blocks are not done.
 
-	PrefetchStrategy = OnDemand
+	prefetchStrategy = OnDemand
 
-#### BlockSize
+#### Block Size
 
 This represents the maximum size (in bytes) of a file block in BSFS's cache. The value you set gets rounded up to a multiple of the filesystem's block size. In our production EC2, block size of 5242880 (5MB) is used. 
 
-	BlockSize = 5242880
+	blockSize = 5242880
 
-#### CacheFolder
+#### Cache Folder
 
 This is the location on disk (not needed for RamBuffer mode) where the parts/blocks of the accessed files are cached. In our production EC2, this is on a 1TB XFS file system.
 
-	CacheFolder = /tmp/bsfsCache
+	cacheFolder = /tmp/bsfsCache
 
-#### CacheSizeLimit
+#### Cache Size Limit
 
 This represents the maximum size (in bytes) of the disk (or RAM in case of RamBuffer mode) which can be used for buffering the data. At runtime, if the cache size limit is reached, then some (least recently used) file blocks are purged to make space for the new incoming blocks. Ensure that the disk where you specify the cache folder location has enough free space. For example, the following line will configure a 100 GB cache.
 
-	CacheSizeLimit = 107374182400
+	cacheSizeLimit = 107374182400
 
-#### NumberOfBlocksToPurgeOnCacheFull
+#### Number of Blocks to Purge on Cache Full
 
 This represents the number of file-blocks to purge when the LRU cache becomes full. In our production EC2, this value is set to 20.
 
-	NumberOfBlocksToPurgeOnCacheFull = 20
+	numberOfBlocksToPurgeOnCacheFull = 20
 
 
 ### Example of BSFS plugin configuration
@@ -862,23 +923,23 @@ This represents the number of file-blocks to purge when the LRU cache becomes fu
 The default configuration used in BaseMount is:
 
     [BSFS]
-	LruCacheMode = RamBuffer
-	PrefetchStrategy = NextBlock
-	CacheFolder = /tmp/bsfs
-	CacheSizeLimit = 262144000
-	BlockSize = 4194304
-	NumberOfBlocksToPurgeOnCacheFull = 20
+	cacheMode = RamBuffer
+	prefetchStrategy = NextBlock
+	cacheFolder = /tmp/bsfs
+	cacheSizeLimit = 262144000
+	blockSize = 4194304
+	numberOfBlocksToPurgeOnCacheFull = 20
 
 
 The default configuration used by BaseSpace Sequence Hub Native Apps running on Amazon instances is:
 
     [BSFS]
-	LruCacheMode = SparseFile
-	PrefetchStrategy = NextBlock
-	CacheFolder = /data/input
-	CacheSizeLimit = 107374182400
-	BlockSize = 5242880
-	NumberOfBlocksToPurgeOnCacheFull = 20
+	cacheMode = SparseFile
+	prefetchStrategy = NextBlock
+	cacheFolder = /data/input
+	cacheSizeLimit = 107374182400
+	blockSize = 5242880
+	numberOfBlocksToPurgeOnCacheFull = 20
 
 
 These lines should be added to the end of the config file `/home/user/.basemount/default.cfg` (Note: replace "default" by the basemount config name you wish to configure).
@@ -956,8 +1017,10 @@ A middle ground can be achieved with both options: `--threads=4 --cache-opt=2:8:
 
 ### How can I refresh the contents of BaseMount's directories?
 
-Feature coming soon.
-For the moment, the only way is to unmount and remount BaseMount.
+You can run:
+
+- `basemount-cmd refresh`
+- echo refresh > .commands
 
 
 ### How can I install a previous version of Basemount?
@@ -1025,6 +1088,11 @@ You can discover which versions of BaseMount are available with the following co
 <a name="ChangeLog"></a>
 
 ## ChangeLog
+
+
+### Tue Jun 14 2016 - v0.14 Alpha
+- Refresh command
+- Move-to-trash and restore-from-trash
 
 
 ### Tue Mar 1 2016 - v0.12 Alpha
