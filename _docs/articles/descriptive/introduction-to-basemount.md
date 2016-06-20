@@ -85,7 +85,6 @@ The script of each video is included here for quick reference.
     <copy authentication URL to browser>
     <login in browser>
     <accept authentication>
-    <back in terminal: enter [empty] passphrase [not] to encrypt access token>
     
     # See the top level of your newly mounted environment!
     ls BaseSpace
@@ -183,9 +182,7 @@ The script of each video is included here for quick reference.
 
 {% endstep %}
 
-{% step 8, null, File upload %} (video coming soon)
-
-Here is a quick step-by-step guide on how easy it is to upload a file to a new AppResult:
+{% step 8, null, File upload %} <iframe width="560" height="315" src="https://www.youtube.com/embed/HLpDFLHd0es" frameborder="0" allowfullscreen></iframe>
 
     # Mount your BaseSpace account
     mkdir BaseSpace
@@ -207,6 +204,28 @@ Here is a quick step-by-step guide on how easy it is to upload a file to a new A
     basemount-cmd mark-as-complete
     # (You can now navigate to your BaseSpace account in a browser
     #  and check that the file is present in the myNewProject project)
+
+{% endstep %}
+
+{% step 9, null, Move to trash and restore from trash %} <iframe width="560" height="315" src="https://www.youtube.com/embed/9B2hQkeEzUE" frameborder="0" allowfullscreen></iframe>
+
+    # Mount your BaseSpace account
+    mkdir BaseSpace
+    basemount BaseSpace
+    
+    # Create new project
+    cd BaseSpace/Projects
+    mkdir myNewProject
+    
+    # Move project to the trash
+    basemount-cmd --path myNewProject move-to-trash
+    
+    # View project in the trash
+    ls -ld ../.Trash/myNewProject
+    
+    # Restore project from the trash
+    basemount-cmd --path ../.Trash/myNewProject restore-from-trash
+    ls -ld myNewProject
 
 {% endstep %}
 
@@ -629,7 +648,6 @@ The upload will automatically be multi-threaded, with a default of 8 threads per
 Note: Uploaded blocks are validated using their MD5 sums.  
 (Note 2: Run upload is not supported yet)  
 (Note 3: For Sample upload, please use the BaseSpaceCLI tools, which are implementing FASTQ validation)
-(Note 4: BaseSpace doesn't allow files of size 0)
 
 
 ### Property editing
@@ -701,40 +719,63 @@ Starting with version 0.14, BaseMount can move data to&from the trash.
 
 Access tokens obtained through authentication are created with a specific set of scopes.  
 Starting with version 0.14, the "MOVETOTRASH GLOBAL" scope is requested.  
-If you authenticated with an older version of BaseMount, your stored access token may not contain the scope needed for write-mode.  
+If you authenticated with an older version of BaseMount, your stored access token may not contain the scope needed for trash operations.  
 To fix this, you need to delete your current configuration (by using `basemount --remove-config [--config=<config>]`) and run BaseMount again to re-authenticate.
 
 
 ### Move to trash
 
-You can delete any BaseSpace Sequence Hub entity using either of these two methods:
+You can delete BaseSpace Sequence Hub entities with any of these methods:
 
-1. Cd into the entity's parent directory and run `rmdir <entity name>`.  
-In case of error (e.g. lack of permissions, app still running, etc.), the entity won't be deleted, and the error message will be added to the `.error` file in the current directory.
+1. `basemount-cmd --path <entity directory> move-to-trash`.  
+In case of error (e.g. lack of permissions, app still running, etc.), the tool will report the error and exit with error code 1.  
 
-2. Cd into the entity's directory and run `basemount-cmd move-to-trash`.  
-In case of error, the tool will report the error and exit with error code 1.  
+2. `cd` into the entity's directory and run `basemount-cmd move-to-trash`.  
 Warning: In case of success, the current directory will become invalid, as the entity will have been deleted.
+
+3. `cd` into the entity's parent directory and run `rmdir <entity name>`.  
+In case of error, the entity won't be deleted, and the error message will be added to the `.error` file in the current directory.
+
+
+### Move only large Run files to trash
+
+With runs, users often wish to delete the large BCL files while retaining the BaseSpace entries and small files such as metrics and monitoring files.  
+
+This is achieved with `basemount-cmd move-to-trash-preserve-metadata`, which deletes only the Data directory from the run, preserving the entity and the other files.
 
 
 ### Restore from trash
 
-The hidden directory `<mount point>/.Trash` contains the list of items stored in your trash.  
-In order to restore one of these items, enter its directory, and run `basemount-cmd restore-from-trash`.  
+The directory `<mount point>/.Trash` (note the dot) contains the list of items stored in your trash.  
+In order to restore one of these items, run:  
+  `basemount-cmd --path <path_of_item_in_trash> restore-from-trash`.  
 
-Warning: The current directory will become invalid, as the entity won't be in the trash anymore.
+Note-warning: If you use this command without --path, by first entering the trash item directory, the current directory will become invalid as soon as the entity gets restored, as it won't be in the trash anymore.
+
+Note: If the restored entity's parent directory had previously been accessed, a manual refresh may be needed to see the restored entity:  
+  `basemount-cmd --path <restored entity's parent path> refresh`
+
+
+### Trash item types
+
+Each item in BaseMount's `.Trash` directory is itself a directory that contains the usual .json and other metadata files, giving you some information about the deleted item.
+
+A text file called `TrashItemType` exposes a string of the form `<Type> (<includes>)`, where:
+
+ - `<Type>` takes values such as "DeletedProject", "DeletedRun", "DeletedAppSession", etc.
+ - `<includes>` is a list of '+'-separated entries as returned by the API, currently either "FILEDATA+METADATA" for items that have been deleted with `move-to-trash`, and just "FILEDATA" for items that have been deleted with `move-to-trash-preserve-metadata`
 
 
 ### Protection against `rm -rf`
 
-Don't use `rm -rf` to delete a BaseSpace Sequence Hub entity.  
+Don't use `rm -rf` to delete a BaseSpace Sequence Hub entity, as it could delete its properties before moving the entity itself to the trash.  
 As a safeguard, any attempt to delete an invalid item (such as the Projects directory or a .json file) blocks any other deletion for 5 seconds. As `rm -rf` usually starts with such invalid items, it should block itself before deleting any data.
 
 
 ### Emptying the trash
 
 We keep this feature hard to access to prevent an accidental loss of data.  
-In order to do so, you will need an access token with the "EMPTY TRASH" scope (obtainable using our `bscli auth` tool), and you will need to issue the DELETE v1pre3/users/current/trash API call yourself (for example with `curl`).
+In order to do so, you will need an access token with the "EMPTY TRASH" scope, and you will need to issue the DELETE v1pre3/users/current/trash API call yourself (for example with `curl`).
 
 Please contact our support team if needed.
 
@@ -744,7 +785,7 @@ Please contact our support team if needed.
 
 ## The basemount-cmd tool
 
-Running `basemount-cmd` displays the list of available commands.
+Running `basemount-cmd` (or its shorter alias `bm-cmd`) displays the list of available commands.
 This list of commands will vary based on your current directory, for example `mark-as-complete` only appears for AppResults that are not yet in status==Complete, whereas the `refresh` command appears in most directories.
 
 
@@ -762,7 +803,7 @@ The current version of basemount-cmd is the first version and is still experimen
 
 In a selected subset of BaseMount directories, extra commands are available, which you can call using
 
-    basemount-cmd <command>
+    basemount-cmd [--path <path to apply command>] <command>
 
 Typing `basemount-cmd <TAB><TAB>` displays the list of available commands.  
 Running `basemount-cmd` without arguments also shows a description for each command.
@@ -776,7 +817,7 @@ Running `basemount-cmd` without arguments also shows a description for each comm
  - **move-to-trash**: Delete current entity (Warning: current directory will become invalid)  
    *Available in: project, run, sample, appresult and appsession entities*
 
- - **move-files-only-to-trash**: Delete files from Data directory, preserves metadata  
+ - **move-to-trash-preserve-metadata**: Delete only the Data directory from the run, preserving the entity and the other files
    *Available in: run entities*
 
  - **restore-from-trash**: Restore entity to main account - Warning: current directory disappears  
@@ -1023,6 +1064,12 @@ You can run:
 - echo refresh > .commands
 
 
+### Can I check which permissions/scopes my access token has?
+
+Yes, you can see this as part of the following json response:  
+  `cat <mount point>/.AccessToken/.json`
+
+
 ### How can I install a previous version of Basemount?
 
 The install script always installs the latest version of BaseMount. If you want to lock in a specific version as part of your system setup scripts, please use the following steps.
@@ -1090,9 +1137,11 @@ You can discover which versions of BaseMount are available with the following co
 ## ChangeLog
 
 
-### Tue Jun 14 2016 - v0.14 Alpha
+### Tue Jun 21 2016 - v0.14 Alpha
 - Refresh command
 - Move-to-trash and restore-from-trash
+- New `bm-cmd` tool, a shorter alias for `basemount-cmd`
+- Moved passphrase encryption to --passphrase
 
 
 ### Tue Mar 1 2016 - v0.12 Alpha
