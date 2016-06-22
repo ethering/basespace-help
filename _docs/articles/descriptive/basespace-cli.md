@@ -619,7 +619,7 @@ Any of the non-project entities can also be listed with their project by adding 
 
 ####Runs
 
-To complement the other listing functions in BSCLI we have introduced the `list runs` command:
+It is also possible to list runs that have been uploaded by an instrument. For instance:
 
     $ bs list runs
     +---------+-------------------------------------+------------------------------------------------------+
@@ -767,9 +767,13 @@ If we want to convert a list of sample names into a list of IDs for app launch o
 
 ## BaseSpace Copy
 
+Copying BaseSpace data is possible in BaseSpaceCLI, via the `bs cp` tool.
+This tools allows to copy data from/to BaseSpace instances, as well as the local file system.
+It has been designed to copy robustly even with high latency or low bandwidth connections, and it will resume downloads if needed.
+
 ### URIs
 
-`bscp` uses the Uniform Resource Identifier to select the entity to copy from/to. 
+`bs cp` uses the Uniform Resource Identifier to select the source and destination location of your data. 
 Multiple schemas are available for different methods of authenticating to BaseSpace:
 
 - `conf://[name]/`
@@ -812,7 +816,7 @@ Copy only InterOp files in the Run with ID `2777282` into the local directory `2
     $ bs cp -v env:///Run/277282/InterOp 2x151PhiX_InterOp
 
 
-##Own Account Info
+##Account Information
 
 For users working with multiple BaseSpace configurations, it can be useful to see details of the access tokens associated with each. The `bs whoami` command provides this token reflection.
 
@@ -830,7 +834,8 @@ For users working with multiple BaseSpace configurations, it can be useful to se
 
 Again, the `yaml`, `csv` and `json` output options are also supported.
 
-BaseSpace now provides support for examining a user's event history and BaseSpaceCLI allows access to this stream of events:
+For users with an Enterprise Tier license, BaseSpace now provides support for examining a user's event history.
+BaseSpaceCLI allows access to this stream of events:
 
     $ bs history -c audit_account | head -10
     Id,DateCreated,ResourceType,ResourceId,ActingUserId,LoggedInUserId,EventType,FieldChanges,Metadata
@@ -844,7 +849,7 @@ BaseSpace now provides support for examining a user's event history and BaseSpac
     5321b580-aad2-448e-ad4a-90672133f5d7_AnalysisResults_253253,2016-06-09T00:05:50.1226915Z,AnalysisResults,253253,3003,3003,Create,name :  -> truseqI1-8899-Name_S12_L001_R2_001_fastqc;datastatus :  -> METADATA_ACTIVE;owneruser :  -> 3003;storagestatus :  -> Online;appsession :  -> 784794;description :  -> Analysis result,projectids:490490;name:truseqI1-8899-Name_S12_L001_R2_001_fastqc
     923f0daf-537e-455a-b248-6255d18416b3_Project_490490,2016-06-09T00:05:10.3893211Z,Project,490490,3003,3003,Update,description : desc added_now edited -> desc added_now edited_edit,name:accessToken12345
 
-- The bs history feature is only supported if you have a token that supports the AUDIT USER scope, which is not requested by default. You can requests a token with the AUDIT USER scope by using the --scopes option of bs authenticate. 
+- The bs history feature is only supported if you have a token that supports the `AUDIT USER` scope, which is not requested by default. You can requests a token with the AUDIT USER scope by using the --scopes option of bs authenticate. 
 - The FieldChanges column of this output provides a semi-colon separated list of changed fields in the form field_name : start_value -> end_value
 - The Metadata column of this output provides a semi-colon separated list of key:value pairs
 
