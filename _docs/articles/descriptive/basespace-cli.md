@@ -818,6 +818,7 @@ Copy only InterOp files in the Run with ID `2777282` into the local directory `2
 
 ##Account Information
 
+###whoami
 For users working with multiple BaseSpace configurations, it can be useful to see details of the access tokens associated with each. The `bs whoami` command provides this token reflection.
 
     $ bs whoami -c hoth
@@ -834,6 +835,8 @@ For users working with multiple BaseSpace configurations, it can be useful to se
 
 Again, the `yaml`, `csv` and `json` output options are also supported.
 
+
+###history
 For users with an Enterprise Tier license, BaseSpace now provides support for examining a user's event history.
 BaseSpaceCLI allows access to this stream of events:
 
@@ -849,7 +852,7 @@ BaseSpaceCLI allows access to this stream of events:
     5321b580-aad2-448e-ad4a-90672133f5d7_AnalysisResults_253253,2016-06-09T00:05:50.1226915Z,AnalysisResults,253253,3003,3003,Create,name :  -> truseqI1-8899-Name_S12_L001_R2_001_fastqc;datastatus :  -> METADATA_ACTIVE;owneruser :  -> 3003;storagestatus :  -> Online;appsession :  -> 784794;description :  -> Analysis result,projectids:490490;name:truseqI1-8899-Name_S12_L001_R2_001_fastqc
     923f0daf-537e-455a-b248-6255d18416b3_Project_490490,2016-06-09T00:05:10.3893211Z,Project,490490,3003,3003,Update,description : desc added_now edited -> desc added_now edited_edit,name:accessToken12345
 
-- The bs history feature is only supported if you have a token that supports the `AUDIT USER` scope, which is not requested by default. You can requests a token with the AUDIT USER scope by using the --scopes option of bs authenticate. 
+- Users without a Enterprise Tier license would not be able to request the `AUDIT USER` scope, and will receive a warning on authentication
 - The FieldChanges column of this output provides a semi-colon separated list of changed fields in the form field_name : start_value -> end_value
 - The Metadata column of this output provides a semi-colon separated list of key:value pairs
 
