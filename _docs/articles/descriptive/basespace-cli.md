@@ -74,25 +74,29 @@ You can also authenticate against an alternative BaseSpace  instance (e.g. a Bas
     $ bs --config hoth authenticate --api-server https://api.cloud-hoth.illumina.com/
     # use "bs --config hoth" for successive commands to make use of this token
 
+
+When deriving an access token, the scopes define the permissions a token has to access, create and manipulate BaseSpace data.
+By default, `bs authenticate` requests a fairly broad set of scopes that works well with the supported operations, but sometimes it can be desirable to request a specific set of scopes.
+You can achieve this by:
+
+    $ bs --config guest --scopes="BROWSE GLOBAL,READ GLOBAL"
+
+
+
 ##Wrapping
-All the BaseSpace  CLI tools can be accessed through a single command: bs. This command uses the same model as git and similar tools to access the underlying functionality, so in place of `git push`, `git pull`, `git commit`, the BaseSpace CLI has `bs launch`, `bs list`, `bs upload` and so on.
+All the BaseSpace  CLI tools can be accessed through a single command: `bs`. This command uses the same model as `git` and similar tools to access the underlying functionality, so in place of `git push`, `git pull`, `git commit`, the BaseSpace CLI has `bs launch`, `bs list`, `bs upload` and so on.
 
 ###Usage and available commands
 To see a usage/help message and the tools that can be executed through bs, run it with the --help option:
 
     $ bs --help
     usage:   bs [options] <COMMAND> [cmd-options]
-    BaseSpaceCLI is a set of command-line tools for working with BaseSpace
-    BaseSpaceCLI includes 2 major features and a series of helper tools:
-      Sample Upload
-      =============
-        bs upload sample -p <project id or BaseMount path> *.fastq.gz
-        bs list samples
-      App Launch
-      ==========
-        bs launch app -n iSAAC <project id or BaseMount path> <sample id or BaseMount path>
-        bs list appsessions
-        bs kill app
+    
+    BaseSpace's Command Line Interface (CLI).
+    
+    The BaseSpaceCLI tool suite is a set of command line tools for interacting with BaseSpace,
+    Illumina's cloud-based sequencing informatics platform.
+    
     Optional arguments:
       -v, --verbose               Increase verbosity of output. Can be repeated.
       --log-file LOG_FILE         Specify a file to log output. Disabled by default.
@@ -104,7 +108,28 @@ To see a usage/help message and the tools that can be executed through bs, run i
       -c CONFIG, --config CONFIG  Configuration id, to be used to access: ~/.basespace/<CONFIG>.cfg
       --terse                     Output relevant BaseSpace IDs to stdout, but nothing else; warnings
                                   and errors still appear on stderr
-    ...
+    
+    Commands:
+     Credentials:
+      authenticate                obtain credentials for the BaseSpaceCLI tools to use
+      whoami                      get information about selected config
+     Creating and listing:
+      create project              create a project
+      history                     Get the event history for a user
+      list                        list BaseSpace entities
+      upload sample               upload a FASTQ-based sample into a BaseSpace project.
+     Apps:
+      import app                  import a new app for launch
+      kill appsession             abort running appsessions.
+      launch app                  launch an app.
+     Filesystem:
+      mount                       access BaseSpace as a filesystem.
+      unmount                     stop accessing BaseSpace as a filesystem.
+     Configuration:
+      register                    register a BaseSpaceCLI tool
+      unregister                  delete one or more BaseSpaceCLI tool from the registry
+    
+    See 'bs help COMMAND' for more information on a specific command.
 
 
 ###Options
@@ -592,6 +617,21 @@ Any of the non-project entities can also be listed with their project by adding 
     | 18065049  | HiSeq 2000: TruSeq PCR-Free (Platinum Genomes) | 19624660 | NA12890              |
     +-----------+------------------------------------------------+----------+----------------------+
 
+####Runs
+
+It is also possible to list runs that have been uploaded by an instrument. For instance:
+
+    $ bs list runs
+    +---------+-------------------------------------+------------------------------------------------------+
+    | runid   | run_name                            | experiment_name                                      |
+    +---------+-------------------------------------+------------------------------------------------------+
+    | 277282  | 11-09-15_M11_0199_A-RG1234567-00CDE | 2x151PhiX                                            |
+    | 718718  | 120831_D0002_0112_AH00TWADXX        | 2x150 HiSeq 2500 demo NA12878                        |
+    | 719719  | 120901_HSQ1003_0152_BH70T4ADXX      | HiSeq 2500 NA12878 demo (2x100)                      |
+    | 9363362 | 141121_ST-E00107_0356_AH00C3CCXX    | HiSeq X Ten TruSeq PCR Free (16 NA12878 1 plex) FC_A |
+    +---------+-------------------------------------+------------------------------------------------------+
+
+
 ###Formatting Options
 The tables produced by the entity listing commands all come with formatting options to enable scripting. The formatting options are selected with the -f switch and the supported formats are:
 
@@ -723,6 +763,99 @@ If we want to convert a list of sample names into a list of IDs for app launch o
     # method 2: loop over the file and call bs each time
     # this method is slower because it makes one API call per sample, but might allow greater control
     $ for sname in $(cat /tmp/samplenames.txt) ; do /home/psaffrey/tmp/basespacecli-installs/bin/bs list samples --sample-name $sname --terse ; done
+
+
+## BaseSpace Copy
+
+Copying BaseSpace data is possible in BaseSpaceCLI, via the `bs cp` tool.
+This tools allows to copy data from/to BaseSpace instances, as well as the local file system.
+It has been designed to copy robustly even with high latency or low bandwidth connections, and it will resume downloads if needed.
+
+### URIs
+
+`bs cp` uses the Uniform Resource Identifier to select the source and destination location of your data. 
+Multiple schemas are available for different methods of authenticating to BaseSpace:
+
+- `conf://[name]/`
+
+Use the supplied configuration with a given name.
+If the name is not provided then use 'default'.
+These configuration files are created by the BaseSpace CLI.
+For example, `conf://server/` maps to `~/.basespace/server.cfg`
+
+- `env:///`
+
+Use the environment variables `BASESPACE_API_SERVER` and `BASESPACE_ACCESS_TOKEN`.
+
+- `http[s]://[token@]hostname/`
+
+Used for interactive authentication, authenticate directly to a given API server URL.
+A special case is made for `api.basespace.illumina.com` where you can simply use `basespace.illumina.com`.
+If a token is supplied then use that for authentication.
+
+###Examples
+
+Copy the local directory dataset to the BaseSpace project `MyUploads` with the AppResult name `MyRun1` using environment variables
+
+    $ bs cp -v dataset env:///Projects/MyUploads/AppResult/MyRun1
+
+Copy the local directory dataset to the BaseSpace project `MyUploads` with the AppResult name `MyRun1` using the default configuration file (needs to be created by bscli)
+
+    $ bs cp -v dataset config:///Projects/MyUploads/AppResult/MyRun1
+
+Copy the local directory dataset to the BaseSpace project `MyUploads` with the AppResult name `MyRun1` using interactive authentication
+
+    $ bs cp -v dataset https://api.basespace.illumina.com/Projects/MyUploads/AppResult/MyRun1
+
+Copy the Run with ID `2777282` into the local directory `2x151PhiX`
+
+    $ bs cp -v env:///Run/277282 2x151PhiX
+
+Copy only InterOp files in the Run with ID `2777282` into the local directory `2x151PhiX_InterOp`
+
+    $ bs cp -v env:///Run/277282/InterOp 2x151PhiX_InterOp
+
+
+##Account Information
+
+###whoami
+For users working with multiple BaseSpace configurations, it can be useful to see details of the access tokens associated with each. The `bs whoami` command provides this token reflection.
+
+    $ bs whoami -c hoth
+    +-----------------+---------------------------------------------------------+
+    | key             | value                                                   |
+    +-----------------+---------------------------------------------------------+
+    | Name            | BaseSpaceCLI Illumina                                   |
+    | Id              | 975975                                                  |
+    | Email           | BaseSpace.CLI@gmail.com                                 |
+    | ApplicationName | BaseSpaceCLI                                            |
+    | DateCreated     | 2015-11-12 10:57:52                                     |
+    | Scopes          | CREATE GLOBAL,BROWSE GLOBAL,CREATE PROJECTS,READ GLOBAL |
+    +-----------------+---------------------------------------------------------+
+
+Again, the `yaml`, `csv` and `json` output options are also supported.
+
+
+###history
+For users with an Enterprise Tier license, BaseSpace now provides support for examining a user's event history.
+BaseSpaceCLI allows access to this stream of events:
+
+    $ bs history -c audit_account | head -10
+    Id,DateCreated,ResourceType,ResourceId,ActingUserId,LoggedInUserId,EventType,FieldChanges,Metadata
+    837d0834-511a-4d93-a858-5cc9d5ebba91_LoginSession_2149147,2016-06-09T00:24:04.8848931Z,User,3003,3003,3003,Login,loggedinuser :  -> 3003;actinguser :  -> 3003,
+    0def522d-1716-460e-a2e3-bae82dc644fc_LoginSession_2144149,2016-06-09T00:23:47.4790952Z,User,3003,3003,3003,Logoff,loggedoffon :  -> 2016-06-09T00:23:47.4165969Z,
+    77516765-3200-4ab2-8753-526bbd3ce801_AnalysisResults_236236,2016-06-09T00:15:34.0611534Z,AnalysisResults,236236,3003,3003,Read,,sizeinbytes:183473;projectids:447447;filepath:/A-Ecoli-SName-S12_S1.report.pdf;fileid:4251258;filename:A-Ecoli-SName-S12_S1.report.pdf
+    d45789d3-0c21-493a-b4a2-d851e5d4dc1d_Grant_1538538,2016-06-09T00:07:07.1902171Z,Grant,1538538,3003,3003,Create,user :  -> 3003;isactive :  -> True;permissionflags :  -> ROLE_OWNER,user:3003
+    ee707a2a-0148-4ddc-88f0-9c3af41bfc64_Grant_1538537,2016-06-09T00:07:07.1120430Z,Grant,1538537,3003,3003,Create,user :  -> 3003;isactive :  -> True;permissionflags :  -> ROLE_OWNER,user:3003
+    a17c8c3e-45f2-4156-9364-74fe39bbf4a0_ApiOAuthV2Token_1017018,2016-06-09T00:07:05.7458081Z,ApiOAuthV2Token,1017018,3003,3003,Update,accesstokendisabledreason :  -> AppSession Ended;accesstokendisabledon :  -> 2016-06-09T00:07:05.7301834Z;accesstokendisabled : False -> True,"applicationname:OReport;apiapplication:146148;resourceowneruser:3003;accesstokenissuedon:2016-06-08T23:07:19.0000000;scope:WRITE project 490490,READ sample 389389;applicationslug:illumina-inc.oreport.1.0.0"
+    bc3f9938-08bc-4c2d-8925-8c074c851218_Grant_1537536,2016-06-09T00:05:50.1226915Z,Grant,1537536,3003,3003,Create,isactive :  -> True;user :  -> 3003;permissionflags :  -> ROLE_OWNER;analysisresults :  -> 253253,user:3003;analysisresults:253253
+    5321b580-aad2-448e-ad4a-90672133f5d7_AnalysisResults_253253,2016-06-09T00:05:50.1226915Z,AnalysisResults,253253,3003,3003,Create,name :  -> truseqI1-8899-Name_S12_L001_R2_001_fastqc;datastatus :  -> METADATA_ACTIVE;owneruser :  -> 3003;storagestatus :  -> Online;appsession :  -> 784794;description :  -> Analysis result,projectids:490490;name:truseqI1-8899-Name_S12_L001_R2_001_fastqc
+    923f0daf-537e-455a-b248-6255d18416b3_Project_490490,2016-06-09T00:05:10.3893211Z,Project,490490,3003,3003,Update,description : desc added_now edited -> desc added_now edited_edit,name:accessToken12345
+
+- Users without a Enterprise Tier license would not be able to request the `AUDIT USER` scope, and will receive a warning on authentication
+- The FieldChanges column of this output provides a semi-colon separated list of changed fields in the form field_name : start_value -> end_value
+- The Metadata column of this output provides a semi-colon separated list of key:value pairs
+
 
 ##Known Bugs
 
