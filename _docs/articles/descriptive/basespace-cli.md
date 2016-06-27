@@ -212,11 +212,11 @@ To see a usage/help message and the tools that can be executed through bs, run i
 ####General Options
 General options are show at the top of the help message for the top level bs command. These are as follows:
 
-- Verbose (-v), quiet (-q) and debug (--debug) control the level of output and the log-file option (--log-file) allows this output to be written to a file
-- The help (-h) and version (-V) options provide information about the bs command itself
-- The dry-run mode (--dry-run) is used as a cue by the underlying tools to report what they would do without actually doing it. This can also be useful when used with the verbose mode to see how the tools are interacting with the BaseSpace API.
-- The config option (-c) allows the user to select a different configuration to be used. More information can be found in [selecting configurations](#SelectingConfigurations).
-- The terse option (--terse) outputs only relevant BaseSpace IDs and nothing else, to assist with scripting bs commands together. Some examples of how the terse option is interpreted
+- Verbose (<code>-v</code>), quiet (<code>-q</code>) and debug (<code>--debug</code>) control the level of output and the log-file option (<code>--log-file</code>) allows this output to be written to a file
+- The help (<code>-h</code>) and version (<code>-V</code>) options provide information about the bs command itself
+- The dry-run mode (<code>--dry-run</code>) is used as a cue by the underlying tools to report what they would do without actually doing it. This can also be useful when used with the verbose mode to see how the tools are interacting with the BaseSpace API.
+- The config option (<code>-c</code>) allows the user to select a different configuration to be used. More information can be found in [selecting configurations](#SelectingConfigurations).
+- The terse option (<code>--terse</code>) outputs only relevant BaseSpace IDs and nothing else, to assist with scripting bs commands together. Some examples of how the terse option is interpreted
     - When listing entities (samples, projects, appresults) only the ID is returned with no header or other output
     - When launching apps, only the appsession ID is returned
     - When uploading samples, only the sample ID is returned
