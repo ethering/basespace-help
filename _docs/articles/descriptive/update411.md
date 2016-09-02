@@ -11,19 +11,16 @@ BaseSpace Sequence Hub will be down for planned maintenance on Tuesday, Septembe
 Both the website and services will be taken down for approximately two hours  between 21:30 UTC and 23:30. 
 
 Any apps running during this maintenance window may have issues contacting BaseSpace Sequence Hub, which could possibly lead to failure. 
-To minimize potential app failures, we will place any native apps, including FASTQ Generation, in to a queue starting at 
+To minimize potential app failures, we will place any native apps, including FASTQ Generation, in to a queue starting  
 8 hours before the maintenance, at 13:30 UTC.  Once services return (estimated time is 23:30 UTC ) we will start 
 executing the jobs in the queue in the order in which they were submitted. 
 This may take some time before they are all processed, and during this time the apps 
 will be shown with the status of “PendingExecution”.
  
 Instruments that are streaming data will be able to upload data up until the planned maintenance starts, and then again afterwards. 
-Our instrument control software has been designed to be accommodate to such outages.
+Our instrument control software has been designed to accommodate such outages.
 
-The previously announced plan to discontinue MiSeq Reporter workflows on BaseSpace will also happen Tuesday. From that time, 
-MiSeq runs on BaseSpace will automatically trigger FASTQ Generation, and from there you can run any of the more than 
-100 published BaseSpace apps for analysis. We will also be depreciating some legacy applications which have 
-suggested replacements according to the table below.
+The previously announced plan to discontinue MiSeq Reporter workflows on BaseSpace will also occur on this date. Beginning then, MiSeq runs on BaseSpace Sequence Hub will automatically trigger FASTQ Generation, from which you can run any of the more than 100 published BaseSpace Sequence Hub apps for analysis. We will also be depreciating some legacy applications, which have suggested replacements in the table below.
 
 <table>
 <tr><th>Software to be Retired</th><th>Replacement BaseSpace Sequence Hub Application</th></tr>
