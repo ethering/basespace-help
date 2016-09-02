@@ -20,10 +20,10 @@ will be shown with the status of “PendingExecution”.
 Instruments that are streaming data will be able to upload data up until the planned maintenance starts, and then again afterwards. 
 Our instrument control software has been designed to be accommodate to such outages.
 
-The previously announced plan to discontinue MiSeq Reporter workflows on BaseSpace will also happen at 13:30 Tuesday. From that time, 
+The previously announced plan to discontinue MiSeq Reporter workflows on BaseSpace will also happen Tuesday. From that time, 
 MiSeq runs on BaseSpace will automatically trigger FASTQ Generation, and from there you can run any of the more than 
-100 published BaseSpace apps for analysis. We will also be depreciating some legacy applications which have suggested replacements according 
-to the table below.
+100 published BaseSpace apps for analysis. We will also be depreciating some legacy applications which have 
+suggested replacements according to the table below.
 
 <table>
 <tr><th>Software to be Retired</th><th>Replacement BaseSpace Sequence Hub Application</th></tr>
