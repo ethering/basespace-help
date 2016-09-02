@@ -1,3 +1,8 @@
+---
+layout: article
+title: BAM files
+---
+
 #H2 Important Message
 
 2016-09-02, San Diego CA.
