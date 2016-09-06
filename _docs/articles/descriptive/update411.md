@@ -11,7 +11,7 @@ BaseSpace Sequence Hub will be down for planned maintenance on Tuesday, Septembe
 Both the website and services will be taken down for approximately two hours  between 21:30 UTC and 23:30. 
 
 Any apps running during this maintenance window may have issues contacting BaseSpace Sequence Hub, which could possibly lead to failure. 
-To minimize potential app failures, we will place any native apps, including FASTQ Generation, in to a queue starting  
+To minimize potential app failures, we will place any launched apps, including FASTQ Generation, in to a queue starting  
 8 hours before the maintenance, at 13:30 UTC.  Once services return (estimated time is 23:30 UTC ) we will start 
 executing the jobs in the queue in the order in which they were submitted. 
 This may take some time before they are all processed, and during this time the apps 
