@@ -283,6 +283,9 @@ This script works on both Ubuntu and CentOS. It adds BaseSpace Sequence Hub pack
     # Install BaseMount
     sudo yum install basemount
     
+    # Only if the command above fails because of missing bash-completion package, run:
+    # sudo yum install epel-release
+    
     # Check that your intended users have permissions to run fusermount (see FUSE doc)
     fusermount --version
     
