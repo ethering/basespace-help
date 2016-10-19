@@ -81,7 +81,7 @@ Supported Operating Systems:
 ###Quick Installation
 Run the following command:
 
-    $ sudo bash -c "$(curl -L https://bintray.com/artifact/download/basespace/helper/install.sh)"
+    sudo bash -c "$(curl -L https://bintray.com/artifact/download/basespace/helper/install.sh)"
 
 ###Manual Installation
 
@@ -127,7 +127,7 @@ To authenticate, type bs authenticate at the terminal. BaseSpaceCLI supplies you
     ....
     Success!
 
-{% callout troubleshoot, Encryped Access Tokens %}
+{% callout troubleshoot, Encrypted Access Tokens %}
 Unlike BaseMount, BaseSpaceCLI does not support access token encryption. This would mean that you would have to enter your password after every BaseSpace CLI command. If you have already authenticated though BaseMount with an encrypted access token, BaseSpaceCLI will ask you to reauthenticate to get an unencrypted access token.
 {% endcallout %}
 
