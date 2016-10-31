@@ -8,7 +8,7 @@ BaseSpace Sequence Hub storage, compute, and third-party application costs are c
 
 ## iCredits
 -----
-iCredits are the common currency in which BS services are priced. Professional and Enterprise subscriptions are invoiced for storage, compute, and third-party application fees in iCredits at a local currency rate that is set by Illumina. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information. 
+iCredits are the common currency in which BS services are priced. Professional and Enterprise subscriptions are invoiced for storage, compute, and third-party application fees. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information. 
 
 Free Trial accounts and new Professional or Enterprise subscription accounts include 250 iCredits that can be used to pay for compute, storage, and third-party applications. 
 
@@ -36,8 +36,8 @@ Free Trial accounts and new Professional or Enterprise subscription accounts inc
                 <td>Additional Storage</td>
                 <td style="text-align: center;">iCredits<sup>2</sup></td>
                 <td style="text-align: center;">No</td>
-                <td style="text-align: center;">Pay as you go/iCredits<sup>2</sup></td>
-                <td style="text-align: center;">Pay as you go/iCredits<sup>2</sup></td>
+                <td style="text-align: center;">iCredits<sup>3</sup></td>
+                <td style="text-align: center;">iCredits<sup>3</sup></td>
             </tr>
             <tr>
                 <td>Purchase Storage Subscription</td>
@@ -57,18 +57,20 @@ Free Trial accounts and new Professional or Enterprise subscription accounts inc
                 <td>Paid Apps</td>
                 <td style="text-align: center;">iCredits<sup>2</sup></td>
                 <td style="text-align: center;">No</td>
-                <td style="text-align: center;">Pay as you go/iCredits<sup>2</sup></td>
-                <td style="text-align: center;">Pay as you go/iCredits<sup>2</sup></td>
+                <td style="text-align: center;">iCredits<sup>3</sup></td>
+                <td style="text-align: center;">iCredits<sup>3</sup></td>
             </tr>
         </table>
 
 <p><small><sup>1</sup> Basic accounts using more than 1 TB of storage can perform instrument runs and download or delete data but cannot share data or use any apps until storage use is below the 1 TB limit. </small></p>
 
-<p><small><sup>2</sup> Free trial iCredits expire after 30 days. Paid subscription iCredits are valid as long as the subscription is current. 
+<p><small><sup>2</sup> Free trial iCredits expire after 30 days. </small><p>
+
+<p><small><sup>3</sup> Professional and Enterprise subscription accounts are billed monthly. The use of promotional iCredits is reflected in the dashboard and the monthly invoice.</small><p>
 
 ##Monthly Invoices
 -----
-For Professional or Enterprise subscription accounts with a valid Purchase Order, Illumina invoices the sum of storage, compute, and third-party application costs each month. iCredits are billed in local currency according to the rate specified in your subscription agreement. 
+For Professional or Enterprise subscription accounts with a valid Purchase Order, Illumina invoices the sum of storage, compute, and third-party application iCredit charges each month. 
 
 The BaseSpace Sequence Hub dashboard displays your iCredit usage for the current billing period. Click **Details** to view the Purchase History for your Professional or Enterprise account.
 

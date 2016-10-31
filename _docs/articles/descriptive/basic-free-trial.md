@@ -6,20 +6,21 @@ hide_welcome_banner: true
 
 
 ##Free trial accounts
----
+
 BaseSpace Sequence Hub offers a limited 30-day free trial for new accounts. New free trial accounts have access to the following features.
 
 - **1 TB free storage**—Additional storage can be purchased with promotional iCredits.
 - **250 iCredits**—Promotional iCredits are valid for 30 days and can be used to pay for additional storage, compute, and third-party app fees.
-- **Free and paid apps**—Access to all BaseSpace Sequence Hub apps during the trial period.
+- **All BaseSpace Sequence Hub Apps**—Access to all BaseSpace Sequence Hub apps during the trial period.
 
 ##Basic accounts
------
+
 After the trial period ends, Free Trial accounts are converted to Basic tier accounts with limited storage and app access.
 
-- **1 TB storage**—Accounts using more than 1 TB are limited to performing instrument runs and downloading or deleting data. Moving or sharing data is restricted until storage use is below the 1 TB limit. 
-- **Free apps**—Access to a limited set of free BaseSpace Sequence Hub apps.
- 
+- **1 TB storage**—Basic accounts are limited to 1 TB storage. To increase your storage, contact your sales representative about upgrading to a Professional or Enterprise Account. 
+	- All Basic accounts can perform instrument runs, download data, and delete data. 
+	- Basic accounts using more than 1 TB storage cannot move data, share data, or use any apps until storage is reduced to less than 1 TB.
+- **Free apps**—Access to a limited set of free BaseSpace Sequence Hub apps. Basic accounts that are over the 1 TB storage limit cannot use free apps.
   -  Elastic Genome Browser
   -  FASTA Upload
   -  FASTQ Generation
