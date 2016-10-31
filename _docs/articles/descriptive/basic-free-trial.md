@@ -19,8 +19,8 @@ After the trial period ends, Free Trial accounts are converted to Basic tier acc
 
 - **1 TB storage**—Basic accounts are limited to 1 TB storage. To increase your storage, contact your sales representative about upgrading to a Professional or Enterprise Account. 
 	- All Basic accounts can perform instrument runs, download data, and delete data. 
-	- Basic accounts using more than 1 TB storage cannot move data, share data, or use any apps until storage is reduced to less than 1 TB.
-- **Free apps**—Access to a limited set of free BaseSpace Sequence Hub apps. Basic accounts that are over the 1 TB storage limit cannot use free apps.
+	- Basic accounts using more than 1 TB storage cannot move data, share data, or run any apps until storage is reduced to less than 1 TB.
+- **Free apps**—Access to a limited set of free BaseSpace Sequence Hub apps. Basic accounts that are over the 1 TB storage limit cannot run free apps.
   -  Elastic Genome Browser
   -  FASTA Upload
   -  FASTQ Generation
