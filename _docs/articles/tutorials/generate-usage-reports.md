@@ -25,11 +25,10 @@ Generate reports of application usage and account activity.
      + **Domain-name**—The name of the enterprise domain the user belongs to. 
      + **Event-type**—The type of login event. 
 
-3. Select a date range for the report.<ol type="a">
+3. Select a date range for the report.
 
-   <li>In the **From** field, select the start date.</li>
-
-   <li>In the **To** field, select the end date.</li></ol>
+   - In the **From** field, select the start date.
+   - In the **To** field, select the end date.
 
 4. In the **Email To** field, enter the email addresses of one or more recipients. Separate each address by a comma.
 
