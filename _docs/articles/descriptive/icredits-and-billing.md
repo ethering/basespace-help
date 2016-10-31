@@ -4,13 +4,13 @@ title: iCredits and Billing
 hide_welcome_banner: true
 ---
 
-BaseSpace Sequence Hub storage, compute, and third-party application costs are charged in iCredits.   
+BaseSpace Sequence Hub storage, compute, and third-party application costs are charged in iCredits. 
 
 ## iCredits
 -----
-iCredits are the common currency in which BS services are priced. Professional and Enterprise subscriptions are invoiced for storage, compute, and third-party application fees. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information. 
+iCredits are the common currency in which BaseSpace Sequence Hub services are priced. Professional and Enterprise subscriptions are invoiced monthly for storage, compute, and third-party application fees used in the previous month. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information. 
 
-Free Trial accounts and new Professional or Enterprise subscription accounts include 250 iCredits that can be used to pay for compute, storage, and third-party applications. 
+iCredits cannot be purchased in advance, however Free Trial accounts and new Professional or Enterprise subscription accounts are granted 250 iCredits that can be used to pay for compute, storage, and third-party applications. 
 
  <table class="table table-bordered" width ="75%">
             <col />
@@ -76,10 +76,13 @@ The BaseSpace Sequence Hub dashboard displays your iCredit usage for the current
 
 ###Storage
 -----
-All accounts include up to 1 TB storage. Professional and Enterprise accounts are invoiced monthly for storage over 1 TB, at a rate of 0.03 iCredits per GB month (the average additional storage over the billing cycle). 
+All accounts include up to 1 TB<sup>*</sup> storage. Professional and Enterprise accounts are invoiced monthly for storage over 1 TB, at a rate of 0.03 iCredits per GB month (the average additional storage over the billing cycle). 
 
 Professional and Enterprise accounts can purchase additional storage subscriptions. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information.
+
 {% callout note, NOTE %}Basic tier customers cannot purchase additional storage. If you need more than 1 TB of storage, contact your sales representative about upgrading to a Professional or Enterprise account.  {% endcallout %}
+
+<p>*<small> 1 TB == 2<sup>40</sup> == 1024<sup>4</sup> bytes</small>
 ###Compute
 -----
 Compute usage is billed in iCredits per node hour. The compute rate for an application is displayed on the application details page. 

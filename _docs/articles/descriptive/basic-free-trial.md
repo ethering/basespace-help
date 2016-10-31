@@ -13,9 +13,11 @@ BaseSpace Sequence Hub offers a limited 30-day free trial for new accounts. New 
 - **250 iCredits**—Promotional iCredits are valid for 30 days and can be used to pay for additional storage, compute, and third-party app fees.
 - **All BaseSpace Sequence Hub Apps**—Access to all BaseSpace Sequence Hub apps during the trial period.
 
+Free trial accounts may be upgraded to Professional or Enterprise subscription accounts. To learn more, please contact your sales representative.
+
 ##Basic accounts
 
-After the trial period ends, Free Trial accounts are converted to Basic tier accounts with limited storage and app access.
+After the trial period ends, accounts that have not upgraded to Professional or Enterprise subscriptions are automatically converted to Basic tier accounts with limited storage and app access. To ensure uninterrupted service, contact your sales representative about upgrading to a Professional or Enterprise subscription before your free trial ends. 
 
 - **1 TB storage**—Basic accounts are limited to 1 TB storage. To increase your storage, contact your sales representative about upgrading to a Professional or Enterprise Account. 
 	- All Basic accounts can perform instrument runs, download data, and delete data. 
