@@ -13,6 +13,6 @@ With a Professional subscription, an Illumina representative sets up the workgro
 
 With an Enterprise subscription, an Illumina representative creates a domain and designates a domain administrator. Domain administrators can create multiple workgroups and assign 1 administrator to each workgroup. 
 
-The domain administrator can access and administer any workgroups in the domain. <!---See [Domain Administration](/articles/descriptive/domain-administration) for more information.--->
+The domain administrator can access and administer any workgroups in the domain. See [Domain Administration](/articles/descriptive/domain-administration) for more information.
 
-{% callout note, NOTE %}Users in your workgroup may incur costs related to data storage, compute, and analysis. To share project and run data only, use the [Get Link](/articles/tutorials/share-data-using-get-link) or [Share](/articles/tutorials/share-data-using-email) options.{% endcallout %}
+{% callout note, NOTE %}Users in your workgroup may incur costs related to data storage, compute, and analysis. To share project and run data only, use the [Get Link](/articles/tutorials/share-data-using-getlink) or [Share](/articles/tutorials/share-data-using-email) options.{% endcallout %}
