@@ -18,7 +18,7 @@ Generate reports of application usage and account activity.
      + **Login**—The login ID of the user.
    + **Login Report**—An overview of account activity. The report includes the following columns.
      + **Date**—The time the activity occurred.
-     + **Category**—The login category.
+     + **Category**—The login category  (workgroup or personal).
      + **Client-address**—The IP&#160;address used to access the application.
      + **Application**—The name of the Illumina Application
      + **User-email**—The email address of the user.
