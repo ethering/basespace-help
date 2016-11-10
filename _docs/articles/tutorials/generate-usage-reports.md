@@ -5,28 +5,11 @@ hide_welcome_banner: true
 ---
 
 
-Generate reports of application usage and account activity. 
+Generate reports of application usage and account activity is only possible through the API or the BCL tool. There is no GUI for this feature at this moment. Please refer the technical instructions in Developers’ Help: https://developer.basespace.illumina.com/docs/content/documentation/rest-api/history-api-reference 
 
-1. Under Settings, click **Usage Report**. 
-2. Click the **Available Reports** drop-down arrow, and select a report type:
-   + **General Usage Report**—An overview of the application usage. The report includes the following columns.
-     + **User Name**—The name of the user.
-     + **Total Sessions**—The number of successful login sessions.
-     + **Last Login**—The last time the user logged in.
-     + **Access Counts**—The total number of times user accessed the login page
-     + **Registration Date**—The date the user registered.
-     + **Login**—The login ID of the user.
-   + **Login Report**—An overview of account activity. The report includes the following columns.
-     + **Date**—The time the activity occurred.
-     + **Category**—The login category (workgroup or personal).
-     + **Client-address**—The IP&#160;address used to access the application.
-     + **Application**—The name of the Illumina Application
-     + **User-email**—The email address of the user.
-     + **Domain-name**—The name of the enterprise domain the user belongs to. 
-     + **Event-type**—The type of login event. 
-3. Select a date range for the report.<ol type="a">
-   <li>In the **From** field, select the start date.</li>
-   <li>In the **To** field, select the end date.</li></ol>
-4. In the **Email To** field, enter the email addresses of one or more recipients. Separate each address by a comma.
-5. Click **Email Reports**.
-   The report is generated and emailed to the specified recipients. 
+Types of information tracked (most important, but not all):
++ Login/logout events
++ User ID
++ Invite to share or transfer events
++ Grant events when sharing or transferring
++ Project, Run, Sample, Lane, AppResult information
