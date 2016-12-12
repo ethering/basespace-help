@@ -10,7 +10,7 @@ BaseSpace Sequence Hub storage, compute, and third-party application costs are c
 -----
 iCredits are the common currency in which BaseSpace Sequence Hub services are priced. iCredits cannot be purchased in advance.
 
-Free Trial accounts and new Professional or Enterprise subscription accounts are granted 250 iCredits that can be used to pay for compute, storage, and third-party applications. 
+Free Trial accounts and new Professional or Enterprise subscription accounts are granted 251 iCredits that can be used to pay for compute, storage, and third-party applications. 
 
 Once these promotional iCredits are used, Professional and Enterprise accounts accrue charges in iCredits for storage, compute, and third-party application fees. Usage is invoiced billed monthly in arrears. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information. 
 
