@@ -1,12 +1,11 @@
 ---
 layout: article
-title: iCredits and Billing
+title: Automatic Lane QC
 hide_welcome_banner: true
 ---
 
 
-Automatic Lane QC
-=================
+## Automatic Lane QC
 
 With automatic lane QC, users will be able to modify settings that enables
 Sequence Hub to automatically apply a QC status to the lanes of sequencing runs
@@ -24,8 +23,7 @@ Analyses.
 
 {% screenshot /images/articles/auto-lane-qc-1_1382x476.png %}
 
-Setting QC Status Manually
-==========================
+## Setting QC Status Manually
 
 Users may override the QC status set by the system. By clicking the checkboxes
 to multi-select lanes, and clicking the Change Status action, a modal opens with
@@ -41,8 +39,7 @@ below).
 
 {% screenshot /images/articles/auto-lane-qc-2_1419x652.png %}
 
-Available Metrics
-=================
+## Available Metrics
 
 Expand the following box to view all available sequencing lane metrics that can
 have thresholds for automatic QC. These metrics are also viewable in the
