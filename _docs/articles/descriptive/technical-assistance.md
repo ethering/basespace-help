@@ -13,11 +13,11 @@ For technical assistance, please contact Illumina Technical Support.
 <table class="table table-bordered">
   <tr>
     <td><b>Illumina Website</b></td>
-    <td><a href="www.illumina.com">www.illumina.com</a></td>
+    <td><a href="http://www.illumina.com">www.illumina.com</a></td>
   </tr>
   <tr>
     <td><b>Email</b></td>
-    <td><a href="techsupport@illumina.com">techsupport@illumina.com</a></td>
+    <td><a href="mailto:techsupport@illumina.com">techsupport@illumina.com</a></td>
   </tr>
 </table>
 
@@ -95,8 +95,8 @@ For technical assistance, please contact Illumina Technical Support.
 
 ## Safety Data Sheets
 
-Safety data sheets (SDSs) are available on the Illumina website at [support.illumina.com/sds/ilmn](support.illumina.com/sds/ilmn).
+Safety data sheets (SDSs) are available on the Illumina website at [support.illumina.com/sds](http://support.illumina.com/sds.html).
 
 ## Product Documentation
 
-Product documentation in the PDF is available for download from the Illumina website. Go to [support.illumina.com](support.illumina.com), select a product, then click **Documentation and Literature**.
+Product documentation in the PDF is available for download from the Illumina website. Go to [support.illumina.com](http://support.illumina.com), select a product, then click **Documentation and Literature**.
