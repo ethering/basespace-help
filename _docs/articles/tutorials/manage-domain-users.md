@@ -30,11 +30,11 @@ View user account details and verify whether a user is active in the domain. You
 3. To expire a user account, select the **Expire User** checkbox, and click **Save**.
 4. To restore an expired user account, clear the **Expire User** checkbox, and click **Save**.
 
-##Manage Administrators##
+##Manage Domain Administrators##
 
-Domain administrators can create workgroups and assign workgroup administrators. Only users who are part of the domain account can be added as administrators.
+Domain administrators can create workgroups and assign workgroup administrators. Only users who are part of the domain account can be added as domain administrators.
 
-Use the following steps to add or remove administrators.
+Use the following steps to add or remove domain administrators.
 
 1. Under User Management, click **Administrators**.
 2. [Optional] Click **Remove** next to an administrators name to remove them.
