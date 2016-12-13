@@ -1,3 +1,10 @@
+---
+layout: article
+title: iCredits and Billing
+hide_welcome_banner: true
+---
+
+
 Automatic Lane QC
 =================
 
@@ -15,7 +22,7 @@ be set to QC passed until a user configures their QC settings.
 When a lane is set to QC failed, its data will be excluded from downstream data
 Analyses.
 
-![](/images/articles/auto-lane-qc-1_1382x476.png)
+{% screenshot /images/articles/auto-lane-qc-1_1382x476.png %}
 
 Setting QC Status Manually
 ==========================
@@ -32,7 +39,7 @@ change.
 It is also possible to change Lane QC status with a REST API (see API access
 below).
 
-![](/images/articles/auto-lane-qc-2_1419x652.png)
+{% screenshot /images/articles/auto-lane-qc-2_1419x652.png %}
 
 Available Metrics
 =================
