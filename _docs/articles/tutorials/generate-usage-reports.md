@@ -5,12 +5,29 @@ hide_welcome_banner: true
 ---
 
 
-Generate reports of application usage and account activity is only possible through the API or the BCL tool. There is no GUI for this feature at this moment. Please refer the technical instructions in Developers’ Help: <https://developer.basespace.illumina.com/docs/content/documentation/rest-api/history-api-reference>
+Enterprise subscription accounts include usage history reports. Domain Administrators can download detailed reports for selected billing periods.
 
-Types of information tracked (most important, but not all):
-
-- Login/logout events
-- User ID
-- Invite to share or transfer events
-- Grant events when sharing or transferring
-- Project, Run, Sample, Lane, AppResult information
+1. Under Settings, click **Usage**. The usage report contains the following information:
+ + **Billing Cycle**—The billing cycle in which the usage was logged. Only the last 6 billing cycles are listed.   
+	+ **Total iCredits**—The total number of iCredits accrued in the billing cycle.
+    + **Workgroup/User**—The name of the personal account or workgroup that incurred charges during the billing period. 
+     	+ Domain Administrators can see all workgroups in the domain.
+     	+ Workgroup owners can see consumption for their workgroups.
+     	+ All users can see their personal consumption.
+    + **Storage iCredits**—The storage iCredit charges accrued for the workgroup or personal account. Storage charges are recomputed daily.
+    + **App iCredits**—The app iCredit charges accrued for the workgroup or personal account.
+    + **Compute iCredits**—The compute iCredit charges accrued for the workgroup or personal account.
+    
+ 
+2. [Optional] Download the transaction detail report.<ol type="a"><li>Click the **Download** icon, and then select a billing period. </li>
+<li>Click **Save** and save the CSV file in the designated folder. By default, the file is named Workgroup-[Workgroup-Name]-Usage-[YYYY-MM].csv.
+</li></ol><br />The report includes the workgroup name, billing period, storage rate, compute rate, and the following columns.
+	+ **Date and Time**—The date and time of the activity.
+  + **User Email**—The login email of the user.
+  + **App Name**—The name of the app used.
+  + **Storage Used (Bytes)**—The number of storage bytes used. 
+  + **Storage Charge (iCredits)**—The storage charge, in iCredits, for the activity. 
+  + **App License Charge (iCredits)**—The app license fee charge, iCredits.
+  + **Compute Time (Minutes)**—The compute time, in minutes, for the activity.
+  + **Compute Unit Price**—The app compute rate.
+  + **Description**—The storage, compute, or app activity that incurred the charge.  
