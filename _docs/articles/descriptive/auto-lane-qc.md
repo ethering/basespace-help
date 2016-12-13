@@ -47,7 +47,7 @@ response of the Runs API in more detail below.
 
 Lanes: 
 
--   LaneNumber:  FOOBAR
+-   LaneNumber:
 -   Density: 773669,
 -   PercentPf: 96.0605,
 -   Phasing: 0.109476,
