@@ -23,7 +23,7 @@ Enterprise subscription accounts include usage history reports. Users can downlo
     + **Compute iCredits**—The compute iCredit charges accrued for the workgroup or personal account.
 
 
-	{% screenshot /images/articles/icredits-usage-report.png %}
+	{% screenshot /images/articles/icredit-usage-report.png %}
     
  
 2. [Optional] Download the transaction detail report.<ol type="a"><li>Click the **Download** icon, and then select a billing period. 
