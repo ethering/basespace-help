@@ -86,7 +86,7 @@ The BaseSpace Sequence Hub dashboard displays your iCredit usage for the current
 
 Click **Details** to view the usage history report.
 
-{% screenshot /images/articles/icredits-usage-report.png %}
+{% screenshot /images/articles/icredit-usage-report.png %}
 
 For more information about usage reports and instructions for downloading detailed reports, see [Generate Usage Reports](/articles/tutorials/generate-usage-reports).
 
