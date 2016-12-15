@@ -27,7 +27,7 @@ Enterprise subscription accounts include usage history reports. Users can downlo
     
  
 2. [Optional] Download the transaction detail report.<ol type="a"><li>Click the **Download** icon, and then select a billing period. 
- {% screenshot /images/articles/icredits-usage-report.png %}</li>
+ {% screenshot /images/articles/icredit-usage-download.png %}</li>
 <li>Click **Save** and save the CSV file in the designated folder. By default, the file is named Workgroup-[Workgroup-Name]-Usage-[YYYY-MM].csv.
 </li></ol><br />The report includes the workgroup name, billing period, storage rate, compute rate, and the following columns.
 	+ **Date and Time**—The date and time of the activity.
