@@ -28,14 +28,12 @@ Enterprise subscription accounts include usage history reports. Users can downlo
  
 2. [Optional] Download the transaction detail report.<ol type="a"><li>Click the **Download** icon, and then select a billing period. 
  {% screenshot /images/articles/icredit-usage-download.png %}</li>
-<li>Click **Save** and save the CSV file in the designated folder. By default, the file is named Workgroup-[Workgroup-Name]-Usage-[YYYY-MM].csv.
-</li></ol><br />The report includes the workgroup name, billing period, storage rate, compute rate, and the following columns.
-	+ **Date and Time**—The date and time of the activity.
-  + **User Email**—The login email of the user.
-  + **App Name**—The name of the app used.
-  + **Storage Used (Bytes)**—The number of storage bytes used. 
-  + **Storage Charge (iCredits)**—The storage charge, in iCredits, for the activity. 
-  + **App License Charge (iCredits)**—The app license fee charge, iCredits.
-  + **Compute Time (Minutes)**—The compute time, in minutes, for the activity.
-  + **Compute Unit Price**—The app compute rate.
+<li>Click **Save** and save the CSV file in the designated folder. By default, the file is named [mmmyyyy]_usages.csv.
+</li></ol><br />The report includes the following columns.
+	+ **Timestamp**—The date and time of the activity.
+  + **LoggedInUser**—The login email of the user.
+  + **Workgroup**—The name of the workgroup.
+  + **Quantity**—The number of units of storage (as bytes per day for the acting user), compute (in minutes), or iCredits used.
+  + **AdjustedCost**—The calculated cost (Quantity &#215; PricePerUnit) of the activity. 
+  + **PricePerUnit**—The price charged per unit of storage, compute, or iCredits. 
   + **Description**—The storage, compute, or app activity that incurred the charge.  
