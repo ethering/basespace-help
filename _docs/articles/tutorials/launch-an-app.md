@@ -4,7 +4,7 @@ title: How to launch an app
 hide_welcome_banner: true
 ---
 
-Launching an app is one of the most essential and basic features in the BaseSpace Hub platform.{% callout note, NOTE %}Third-party apps may incur license or compute fees. For a list of free apps available to Basic accounts, see [Basic and Free Trial Accounts](/articles/descriptive/basic-free-trial). {% endcallout %}
+Launching an app is one of the most essential and basic features in the BaseSpace Hub platform.{% callout note, NOTE %}Apps can incur storage, compute, or third-party license fees. If an app terminates due to a BaseSpace Sequence Hub error, fees associated with the terminated run are not charged; if the app is terminated by a user, fees associated with the terminated run are applied. {% endcallout %}
 
 An app can be launched in one of two ways.
 <br />
