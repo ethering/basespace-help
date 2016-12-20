@@ -9,7 +9,7 @@ Enterprise subscription accounts include usage history reports. Users can downlo
 
 1. Use 1 of the following methods to view the usage report.
 	- From the Dashboard iCredits panel, click **Details.** {% screenshot /images/articles/icredits-dashboard.png %}
-	- Click the Account drop-down arrow, and select **Settings**. In the usage page, select **Usage**. 
+	- Click the Account drop-down arrow, and select **Settings**. In the Settings page, select **Usage**. 
 	
 	The usage report contains the following information:
  + **Billing Cycle**—The billing cycle in which the usage was logged. Only the last 6 billing cycles are listed.   
@@ -33,7 +33,7 @@ Enterprise subscription accounts include usage history reports. Users can downlo
 	+ **Timestamp**—The date and time of the activity.
   + **LoggedInUser**—The login email of the user.
   + **Workgroup**—The name of the workgroup.
-  + **Quantity**—The number of units of storage (as bytes per day for the acting user), compute (in minutes), or  iCredits (for app license fees) used.
+  + **Quantity**—The number of units of storage (in bytes per day for the acting user), compute (in minutes), or  iCredits (for app license fees) used.
   + **AdjustedCost**—The calculated cost (Quantity &#215; PricePerUnit) of the activity. 
   + **PricePerUnit**—The price charged per unit of storage, compute, or iCredits. 
   + **Description**—The storage, compute, or app activity that incurred the charge.  
