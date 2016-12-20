@@ -33,7 +33,7 @@ Enterprise subscription accounts include usage history reports. Users can downlo
 	+ **Timestamp**—The date and time of the activity.
   + **LoggedInUser**—The login email of the user.
   + **Workgroup**—The name of the workgroup.
-  + **Quantity**—The number of units of storage (as bytes per day for the acting user), compute (in minutes), or iCredits used.
+  + **Quantity**—The number of units of storage (as bytes per day for the acting user), compute (in minutes), or  iCredits (for app license fees) used.
   + **AdjustedCost**—The calculated cost (Quantity &#215; PricePerUnit) of the activity. 
   + **PricePerUnit**—The price charged per unit of storage, compute, or iCredits. 
   + **Description**—The storage, compute, or app activity that incurred the charge.  
