@@ -1,4 +1,4 @@
- ---
+---
 layout: article
 title: Security Model
 hide_welcome_banner: true
