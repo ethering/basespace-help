@@ -6,7 +6,7 @@ hide_welcome_banner: true
 
 Data security is a key concern in deciding to move to cloud-based genomic storage and analysis. BaseSpace Sequence Hub is hosted on Amazon Web Services (AWS) and provides a combination of Amazon's comprehensive and well-tested approach to platform security, overlaid with Illumina's own security testing and procedures. These procedures include reviews and tests by independent security professionals. This cloud genomics solution meets or exceeds the security provided by many institutional IT infrastructures.
 
-##Amazon Web Services (AWS)
+##Amazon Web Services (AWS) 
 Illumina works with AWS, the leader in cloud-based infrastructure. AWS hosts customer-facing services and critical operations for both private industry and U.S. government departments including Treasury, DOE, and State. Amazon security processes and standards are publicly available for review. AWS standards and accreditation include:
 
 - SOC 1/SSAE 16/ISAE 3402 (auditing)
