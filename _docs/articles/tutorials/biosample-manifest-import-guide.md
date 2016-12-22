@@ -1,8 +1,13 @@
-Biosample Manifest Import Guide
-===============================
+---
+layout: article
+title: Biosample Manifest Import
+hide_welcome_banner: true
+---
+##Biosample Manifest Import
 
-Intro to Biosample Manifests
-============================
+
+##Intro to Biosample Manifests
+
 
 The Biosample Manifest file allow BaseSpace users to import new Bioamples in
 bulk, add library prep instructions, add auto-launchable Analysis Workflows, and
@@ -35,7 +40,6 @@ Biosample manifest file.
 ![](media/b742294055b9c4ba488ba32598c8e973.png)
 
 Full Examples
-=============
 
 [BaseSpace Manifest Import no
 templates.csv](https://confluence.illumina.com/download/attachments/105393997/BaseSpace%20Manifest%20Import%20no%20templates.csv?version=2&modificationDate=1456366067509&api=v2)
@@ -60,8 +64,7 @@ performs on the values in each column of the manifest to assist the
 sample-to-answer process being automated. These validations are explained in the
 sections below.
 
-File Formatting
-===============
+##File Formatting
 
 Headers
 
@@ -92,8 +95,8 @@ Example
 | **BioSample Name** | **Default Project** | **Container Name** |
 | *value...*         | *value...*          | *value...*         |
 
-Adding Biosamples and Projects
-==============================
+##Adding Biosamples and Projects
+
 
 In these four columns, we are defining the biosamples we are adding or updating
 to BaseSpace. The Biosample name is a unique identifier for the source DNA. If a
@@ -132,8 +135,8 @@ Example
 | LP0000001-DNA\_C01   | TestProject         | LP0000001-DNA      | C01                    |
 | *more biosamples...* |                     |                    |                        |
 
-Adding Prep Requests to Create Libraries
-========================================
+##Adding Prep Requests to Create Libraries
+
 
 The Prep Request and Required Yield Gbp columns are both optional columns that
 are used to tell a connected lab software system (LIMS) how to prepare
@@ -167,8 +170,8 @@ Example prep requests:
 
 2.  TruSeq Nano High Throughput
 
-Scheduling Analyses for Auto-app Launch
-=======================================
+##Scheduling Analyses for Auto-app Launch
+
 
 [Analysis
 Workflows](https://confluence.illumina.com/display/BS/Analysis+Workflows+for+Auto-App+Launch)
@@ -293,8 +296,8 @@ Note that the Isaac Analysis Workflow for Biosample 2 is only entered once (in
 the first manifest). The output of this Analysis will be used by the
 Tumor/Normal Analysis scheduled in the second manifest.
 
-Adding Metadata to Biosamples
-=============================
+##Adding Metadata to Biosamples
+
 
 Custom metadata can be added to Biosamples by entering in new column headers in
 the same row as the required column headers. Adding values in these columns to
@@ -325,8 +328,8 @@ Example
 |                      | ID-1498126           |
 | *more biosamples...* |                      |
 
-Adding to Existing Biosamples
-=============================
+##Adding to Existing Biosamples
+
 
 When an existing Biosample Name is entered, all columns besides the Prep Request
 columns (in orange) or Analysis columns (in green) will be ignored. If a default
@@ -371,8 +374,8 @@ Validation
 | LP0000001-DNA\_A01 |                     | IsaacV4.0WF-ANY                 |                        |                  |
 | LP0000001-DNA\_B01 |                     | IsaacV4.0WF-ANY                 |                        |                  |
 
-Using Sample Sheets with the Biosample Manifest
-===============================================
+##Using Sample Sheets with the Biosample Manifest
+
 
 Purpose
 -------
