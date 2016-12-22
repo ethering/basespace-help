@@ -4,9 +4,9 @@ title: Security Model
 hide_welcome_banner: true
 ---
 
-Data security is a key concern in deciding to move to cloud-based genomic storage and analysis. Illumina  is hosted on Amazon Web Services (AWS) and provides a combination of Amazon’s comprehensive and well-tested approach to platform security, overlaid with Illumina’s own security testing and procedures. These procedures include reviews and tests by independent security professionals. This cloud genomics solution meets or exceeds the security provided by many institutional IT infrastructures.
+Data security is a key concern in deciding to move to cloud-based genomic storage and analysis. BaseSpace Sequence Hub is hosted on Amazon Web Services (AWS) and provides a combination of Amazon's comprehensive and well-tested approach to platform security, overlaid with Illumina's own security testing and procedures. These procedures include reviews and tests by independent security professionals. This cloud genomics solution meets or exceeds the security provided by many institutional IT infrastructures.
 
-##Amazon Web Services (AWS)
+##Amazon Web Services (AWS) 
 Illumina works with AWS, the leader in cloud-based infrastructure. AWS hosts customer-facing services and critical operations for both private industry and U.S. government departments including Treasury, DOE, and State. Amazon security processes and standards are publicly available for review. AWS standards and accreditation include:
 
 - SOC 1/SSAE 16/ISAE 3402 (auditing)
@@ -29,12 +29,8 @@ Enterprise subscription accounts can retrieve a detailed history of user, workgr
 - Changes to user profiles, including new profiles, authorization assignments, and delegations
 - Project, Run, Sample, Lane, and AppResult information
 
-
 For information about retrieving audit log information, see [History API Reference](https://developer.basespace.illumina.com/docs/content/documentation/rest-api/history-api-reference) in the BaseSpace Developer help. 
 
 ##Additional Information
 
 For more information, see the [BaseSpace Sequence Hub Data Security Technical Note](http://www.illumina.com/content/dam/illumina-marketing/documents/products/whitepapers/basespace-sequence-hub-security-and-privacy-white-paper-970-2016-020.pdf)
-
-
- 
