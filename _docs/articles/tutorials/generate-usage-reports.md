@@ -34,9 +34,9 @@ The usage report contains the following information.
     
 -------------
 ## Download Reports
-1. Use 1 of the following methods to view the usage report.
-	- From the Dashboard iCredits panel, select **Details.** {% screenshot /images/articles/icredits-dashboard.png %}
+1. Use either of the following methods to view the usage report.
 	- Select the Account drop-down arrow, and then select **Settings**. In the Settings page, select **Usage**. 
+	- From the Dashboard iCredits panel, select **Details.** {% screenshot /images/articles/icredits-dashboard.png %}
 2. Select the **Download** icon, and then select a billing period. 
  {% screenshot /images/articles/icredit-usage-download.png %}
 3. Select **Save** and save the CSV file in the designated folder. By default, the file is named [mmmyyyy]_usages.csv.
