@@ -50,7 +50,7 @@ The report contains the following columns.
 	+ Storage activity is listed in bytes per day for the acting user. Each billing day is listed on separate line. 
 	+ Compute activity is listed in total minutes of compute time.
 	+ App license fees are listed in iCredits.
-+ **AdjustedCost**—The cal culated cost (Quantity &#215; PricePerUnit) of the activity. 
++ **AdjustedCost**—The calculated cost (Quantity &#215; PricePerUnit) of the activity. 
 + **PricePerUnit**—The price charged per unit of storage, compute, or iCredits. 
 + **Description**—The activity that incurred the charge. Storage charges are calculated daily as an average over the period; the description refers to the latest event that affected storage rate calculation.   
 
