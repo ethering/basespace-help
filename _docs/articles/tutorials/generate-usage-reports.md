@@ -10,6 +10,8 @@ Enterprise subscription accounts include usage history reports. Users and admini
 + Domain administrators can view and download usage history for all workgroups in the domain.
 + Workgroup administrators can view and download usage history for their workgroups.
 + All users can view and download their personal usage history.
+
+For more information about usage costs, see [iCredits and Billing](/articles/descriptive/icredits-and-billing).
  
 ----------------
 ##View Reports
@@ -41,13 +43,23 @@ The usage report contains the following information.
 
 The report contains the following columns.
 	
-+ **Timestamp**—The date and time of the activity.
++ **Timestamp**—The date and time of the activity. This column is not sorted by default.
 + **LoggedInUser**—The login email of the user.
 + **Workgroup**—The name of the workgroup.
 + **Quantity**—The number of units of storage, compute, or app license fees used. 
-	+ Storage activity is listed in bytes per day for the acting user.
+	+ Storage activity is listed in bytes per day for the acting user. Each billing day is listed on separate line. 
 	+ Compute activity is listed in total minutes of compute time.
 	+ App license fees are listed in iCredits.
-+ **AdjustedCost**—The calculated cost (Quantity &#215; PricePerUnit) of the activity. 
++ **AdjustedCost**—The cal culated cost (Quantity &#215; PricePerUnit) of the activity. 
 + **PricePerUnit**—The price charged per unit of storage, compute, or iCredits. 
-+ **Description**—The activity that incurred the charge. 
++ **Description**—The activity that incurred the charge. Storage charges are calculated daily as an average over the period; the description refers to the latest event that affected storage rate calculation.   
+
+In the following sample report, line 25 lists a third-party app license fee. Lines 29—32 represent the daily storage charges over a period of 4 days. 
+
++ Line 29—Storage charge for the day reflects usage increase after sharing data.
++ Line 30—Storage charge for the day reflects usage decrease after emptying the trash.
++ Line 31—Storage charge for the day reflects usage increase after sharing data.
++ Line 32—Storage charge for the day is unchanged. The timestamp reflects the date of the latest rate change event.
+
+{% screenshot /images/articles/usage-report-csv.png %}
+
