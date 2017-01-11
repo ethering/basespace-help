@@ -35,6 +35,7 @@ title: BaseSpace Sequence Hub Command Line Interface
  - [Sample Upload](#SampleUpload)
     - [Basic Usage](#SampleUploadUsage)
     - [Fastq Validation](#FastqValidation)
+        - [Switching Off Validation](#SwitchingOffValidation)
     - [Upload Options](#UploadOptions)
     - [Bulk Upload](#BulkUpload)
         - [Using SampleSheet.csv](#UsingSampleSheet)
@@ -652,6 +653,17 @@ Fastq files are validated based on the following criteria:
 
 These options are also available from the BaseSpaceCLI with the --show-validation-rules option.
 
+<a name="SwitchingOffValidation"></a>
+####Switching off validation
+
+It is possible to relax some of the validation rules to allow a wider variety of fastq files to be uploaded:
+
+- Switch off read name validation (`--allow-invalid-readnames`), so that READ1 and READ2 descriptors can be of any form.
+
+
+{% callout troubleshoot, Invalid Fastq Files %}
+The fastq validation rules are in place to ensure the smoothest possible compatibility between uploaded samples and apps. Uploading files where not all validation rules are met may cause certain apps to fail; these options are used at the user's own risk.
+{% endcallout %}
 
 <a name="UploadOptions"></a>
 
