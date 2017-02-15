@@ -34,6 +34,7 @@ The usage report contains the following information.
     
 -------------
 ## Download Reports
+
 1. Use either of the following methods to view the usage report.
 	- Select the Account drop-down arrow, and then select **Settings**. In the Settings page, select **Usage**. 
 	- From the Dashboard iCredits panel, select **Details.** {% screenshot /images/articles/icredits-dashboard.png %}
@@ -62,4 +63,3 @@ In the following sample report, line 25 lists a third-party app license fee. Lin
 + Line 32—Storage charge for the day is unchanged. The timestamp reflects the date of the latest rate change event.
 
 {% screenshot /images/articles/usage-report-csv.png %}
-
