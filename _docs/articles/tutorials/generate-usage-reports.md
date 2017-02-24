@@ -42,7 +42,6 @@ The usage report contains the following information.
  {% screenshot /images/articles/icredit-usage-download.png %}
 3. Select **Save** and save the CSV file in the designated folder. By default, the file is named Workgroup-[Workgroup-Name]-Usage-[YYYY-MM].csv.
 
-The report includes the workgroup name, billing period, storage rate, storage allotment, compute rate, and the following columns.
 
 **Applications iCredit Consumption**
 
