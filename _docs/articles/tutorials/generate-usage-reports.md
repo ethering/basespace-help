@@ -45,7 +45,7 @@ The usage report contains the following information.
 
 **Applications iCredit Consumption**
 
-+ **Date**—The date and time of the activity.
++ **Date**—The date and time of the activity, in Coordinated Universal Time (UTC).
 + **App Name**—The name of the app used.
 + **iCredits Consumption**—The total number of iCredits charged for the activity.
 + **App Fee**—The app license fee charge, in iCredits.
