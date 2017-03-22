@@ -1,13 +1,13 @@
 ---
 layout: article
-title: Using the Python Run Downloader
+title: Use the Python Run Downloader
 hide_welcome_banner: true
 ---
 
-In order to communicate with our API you will need an access token. Here are the steps to obtain one from your account.
+To download files associated with a BaseSpace Run, a python script is available that works with a Run ID and an access token for your account. Follow these steps to obtain and use this script.
 
-Before you begin, download the [BaseSpace Run Downloader](https://da1s119xsxmu0.cloudfront.net/sites/knowledgebase/API/08052014/Script/BaseSpaceRunDownloader_v2.zip) Python Script and unzip the files. 
-
+1. Download the [BaseSpace Run Downloader](https://da1s119xsxmu0.cloudfront.net/sites/knowledgebase/API/08052014/Script/BaseSpaceRunDownloader_v2.zip) Python Script and unzip the files to an empty directory. 
+{% callout note, NOTE %}The runfolder downloads to the same directory that the script is executed from.  Make sure that you have enough space in the directory for the downloaded runs.{% endcallout %}
 
 1.	Go to https://developer.basespace.illumina.com/ and log in.
 
@@ -21,8 +21,12 @@ Before you begin, download the [BaseSpace Run Downloader](https://da1s119xsxmu0.
 
 5. On the application page, select the **Credentials** tab. {% screenshot /images/articles/credentials-tab.png %}
 
-6. Copy the access token and Run ID to the Windows batch file or Linux script that will run the python run downloader. The Run ID can be obtained from the URL for the desired run.<br /><br />Example Windows batch file/Linux shell script (single line):<br />python BaseSpaceRunDownloader_v2.py -r \<Run ID\> -a \<access token\>
-{% callout note, NOTE %}The runfolder downloads to the same directory that the script is executed from.  Make sure that you have enough space in the directory for the downloaded runs.{% endcallout %}
+6. Create a new text file to serve as a script to run the python run downloader. <ol type="a">
+7. Name the file as desired with an extension appropriate to the operating system.
+	-  Windows batch file (*.bat)
+	-  Linux shell script (*.sh)
+7. Copy the access token and Run ID to the Windows batch file or Linux script. The Run ID can be obtained from the URL for the desired run.</ol>
+Example Windows batch file/Linux shell script (single line):
+<br />python BaseSpaceRunDownloader_v2.py -r \<Run ID\> -a \<access token\>
 
-7. Run the script.
- 
+7. Run the script.<br />When the script executes, the runfolder files appear in a new output directory. 
