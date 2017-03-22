@@ -25,6 +25,6 @@ To download files associated with a BaseSpace Run, a python script is available 
 	</li>
 	<li>Copy the access token and Run ID to the Windows batch file or Linux script. The Run ID can be obtained from the URL for the desired run.</li>
 	</ol>
-     Example Windows batch file/Linux shell script (single line):
-	<code>python BaseSpaceRunDownloader_v2.py -r \<Run ID\> -a \<access token\></code>
+     Example Windows batch file/Linux shell script (single line):<br />
+		<code>python BaseSpaceRunDownloader_v2.py -r <Run ID\> -a <access token\></code>
 7. Run the script.<br />When the script executes, the runfolder files appear in a new output directory. 
