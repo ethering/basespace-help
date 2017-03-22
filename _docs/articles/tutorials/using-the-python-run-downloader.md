@@ -16,6 +16,7 @@ To download files associated with a BaseSpace Run, a python script is available 
 4. Fill out the Applications Details and then select **Create Application**.
 5. On the application page, select the **Credentials** tab. {% screenshot /images/articles/credentials-tab.png %}
 6. Create a new text file to serve as a script to run the python run downloader.
+
 	<ol type="a">
      <li>Name the file as desired with an extension appropriate to the operating system:
 	<ul>
@@ -26,5 +27,6 @@ To download files associated with a BaseSpace Run, a python script is available 
 	<li>Copy the access token and Run ID to the Windows batch file or Linux script. The Run ID can be obtained from the URL for the desired run.</li>
 	</ol>
      Example Windows batch file/Linux shell script (single line):<br />
-		<code>python BaseSpaceRunDownloader_v2.py -r <Run ID\> -a <access token\></code>
+		
+		python BaseSpaceRunDownloader_v2.py -r <Run ID> -a <access token>
 7. Run the script.<br />When the script executes, the runfolder files appear in a new output directory. 
