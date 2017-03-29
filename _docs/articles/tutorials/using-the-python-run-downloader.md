@@ -4,17 +4,18 @@ title: Use the Python Run Downloader
 hide_welcome_banner: true
 ---
 
-To download files associated with a BaseSpace Run, a python script is available that works with a Run ID and an access token for your account. Follow these steps to obtain and use this script.
+To download files associated with a BaseSpace Run, use a Python script with the Run ID and your account access token. Follow these steps to obtain and use this script. 
 
-1. Download the [BaseSpace Run Downloader](https://da1s119xsxmu0.cloudfront.net/sites/knowledgebase/API/08052014/Script/BaseSpaceRunDownloader_v2.zip) Python Script and unzip the files to an empty directory. 
-{% callout note, NOTE %}The runfolder downloads to the same directory that the script is executed from.  Make sure that you have enough space in the directory for the downloaded runs.{% endcallout %}
+1. Download the [BaseSpace Run Downloader](https://da1s119xsxmu0.cloudfront.net/sites/knowledgebase/API/08052014/Script/BaseSpaceRunDownloader_v2.zip) and unzip the files to an empty directory. <br />The runfolder downloads to the same directory that the script is executed from.  Make sure that you have enough space in the directory for the downloaded runs.
+{% callout note, NOTE %}
+The BaseSpace Run Downloader Python Script is a BaseSpace Labs product. For inquiries, feedback, or support, contact [basespacelabs@illumina.com](mailto:basespacelabs@illumina.com).{% endcallout %}
 1.	Go to [https://developer.basespace.illumina.com/](https://developer.basespace.illumina.com/) and log in.
 2.	From the toolbar, select **My Apps**.
 {% screenshot /images/articles/my-apps-link.png %}
 3.	In the applications tab, select **Create a New Application**.
 {% screenshot /images/articles/create-button.png %}
 4. Fill out the Applications Details and then select **Create Application**.
-5. On the application page, select the **Credentials** tab. {% screenshot /images/articles/credentials-tab.png %}
+5. On the application page, select the **Credentials** tab and copy the Access Token. {% screenshot /images/articles/credentials-tab.png %}
 6. Create a new text file to serve as a script to run the python run downloader.
 
 	<ol type="a">
