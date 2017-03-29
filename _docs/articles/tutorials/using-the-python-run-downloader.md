@@ -4,11 +4,9 @@ title: Use the Python Run Downloader
 hide_welcome_banner: true
 ---
 
-To download files associated with a BaseSpace Run, use a Python script with the Run ID and your account access token. Follow these steps to obtain and use this script. 
+To download files associated with a BaseSpace Run, use a Python script with the Run ID and your account access token. This example uses the [BaseSpace Run Downloader](https://da1s119xsxmu0.cloudfront.net/sites/knowledgebase/API/08052014/Script/BaseSpaceRunDownloader_v2.zip) script. 
 
-1. Download the [BaseSpace Run Downloader](https://da1s119xsxmu0.cloudfront.net/sites/knowledgebase/API/08052014/Script/BaseSpaceRunDownloader_v2.zip) and unzip the files to an empty directory. <br />The runfolder downloads to the same directory that the script is executed from.  Make sure that you have enough space in the directory for the downloaded runs.
-{% callout note, NOTE %}
-The BaseSpace Run Downloader Python Script is a BaseSpace Labs product. For inquiries, feedback, or support, contact [basespacelabs@illumina.com](mailto:basespacelabs@illumina.com).{% endcallout %}
+1. Download the script and unzip the files to an empty directory. <br />The runfolder downloads to the same directory that the script is executed from.  Make sure that you have enough space in the directory for the downloaded runs.
 1.	Go to [https://developer.basespace.illumina.com/](https://developer.basespace.illumina.com/) and log in.
 2.	From the toolbar, select **My Apps**.
 {% screenshot /images/articles/my-apps-link.png %}
