@@ -6,7 +6,7 @@ hide_welcome_banner: true
 
 BaseSpace Sequence Hub storage, compute, and third-party app costs are charged in iCredits. 
 
-## iCredits
+##iCredits
 -----
 iCredits are the common currency in which BaseSpace Sequence Hub services are priced. iCredits cannot be purchased in advance.
 
@@ -118,4 +118,3 @@ Third-party app charges are deducted from promotional iCredits at the end of eac
 For Professional or Enterprise subscription accounts with a valid Purchase Order, Illumina invoices the sum of storage, compute, and third-party app iCredit charges each month. The sum is rounded up to the nearest whole iCredit when the invoice is calculated.
 
 {% callout note, NOTE %}If an app terminates due to a BaseSpace Sequence Hub error, fees associated with the terminated run are not charged; if the app is terminated by a user, fees associated with the terminated run are applied.{% endcallout %}
-
