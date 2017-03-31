@@ -12,7 +12,7 @@ iCredits are the common currency in which BaseSpace Sequence Hub services are pr
 
 Free Trial accounts and new Professional or Enterprise subscription accounts are granted 250 iCredits that can be used to pay for compute, storage, and third-party apps. Free Trial iCredits expire after 30 days.
 
-Once these promotional iCredits are used, Professional and Enterprise accounts accrue charges in iCredits for storage, compute, and third-party app fees. Usage is invoiced billed monthly. [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information. 
+Once these promotional iCredits are used, Professional and Enterprise accounts accrue charges in iCredits for storage, compute, and third-party app fees. Usage is invoiced monthly. See [iCredit Currency Conversion](#icredit-conversion) for local currency conversion rates, or [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information.  
 
 Promotional and subscription iCredit charges are rounded up to the nearest iCredit. The BaseSpace Sequence Hub dashboard displays your current iCredit usage.
 
@@ -118,3 +118,78 @@ Third-party app charges are deducted from promotional iCredits at the end of eac
 For Professional or Enterprise subscription accounts with a valid Purchase Order, Illumina invoices the sum of storage, compute, and third-party app iCredit charges each month. The sum is rounded up to the nearest whole iCredit when the invoice is calculated.
 
 {% callout note, NOTE %}If an app terminates due to a BaseSpace Sequence Hub error, fees associated with the terminated run are not charged; if the app is terminated by a user, fees associated with the terminated run are applied.{% endcallout %}
+
+###iCredit Currency Conversion<a name="icredit-conversion"></a> 
+ 
+The following table lists the iCredit to currency conversion. 
+ 
+ <table class="table table-bordered"  width="25%"> 
+            <col /> 
+            <col /> 
+            <tbody> 
+                <tr> 
+                    <th style="text-align: left;">Currency</th> 
+                    <th style="text-align: left;">Value</th> 
+                </tr> 
+                <tr> 
+                    <td>AUD</td> 
+                    <td>1.33</td> 
+                </tr> 
+                <tr> 
+                    <td>CAD</td> 
+                    <td>1.36</td> 
+                </tr> 
+                <tr> 
+                    <td>CHF</td> 
+                    <td>1.05</td> 
+                </tr> 
+                <tr> 
+                    <td>CNY</td> 
+                    <td>6.98</td> 
+                </tr> 
+                <tr> 
+                    <td>DKK</td> 
+                    <td>7.04</td> 
+                </tr> 
+                <tr> 
+                    <td>EUR</td> 
+                    <td>0.94</td> 
+                </tr> 
+                <tr> 
+                    <td>GBP</td> 
+                    <td>0.79</td> 
+                </tr> 
+                <tr> 
+                    <td>HKD</td> 
+                    <td>8.15</td> 
+                </tr> 
+                <tr> 
+                    <td>ISK</td> 
+                    <td>133</td> 
+                </tr> 
+                <tr> 
+                    <td>JPY</td> 
+                    <td>120</td> 
+                </tr> 
+                <tr> 
+                    <td>NOK</td> 
+                    <td>9</td> 
+                </tr> 
+                <tr> 
+                    <td>NZD</td> 
+                    <td>1.47</td> 
+                </tr> 
+                <tr> 
+                    <td>SEK</td> 
+                    <td>8.83</td> 
+                </tr> 
+                <tr> 
+                    <td>SGD</td> 
+                    <td>1.41</td> 
+                </tr> 
+                <tr> 
+                    <td>USD</td> 
+                    <td>1</td> 
+                </tr> 
+            </tbody> 
+        </table> 
