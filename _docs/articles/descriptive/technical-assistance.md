@@ -17,7 +17,7 @@ For technical assistance, please contact Illumina Technical Support.
   </tr>
   <tr>
     <td><b>Email</b></td>
-    <td><a href="mailto:techsupport@illumina.com">techsupport@illumina.com</a></td>
+    <td><a href="mailto:basespace-support@illumina.com?Subject=Basespace%20Sequence%20Hub%20Support">basespace-support@illumina.com</a></td>
   </tr>
 </table>
 
