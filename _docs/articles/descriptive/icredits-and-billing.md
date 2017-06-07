@@ -6,18 +6,19 @@ hide_welcome_banner: true
 
 BaseSpace Sequence Hub storage, compute, and third-party app costs are charged in iCredits. 
 
+{% callout note, NOTE %}New Professional or Enterprise subscribers can sign up for a fixed-price plan with unlimited storage and compute for their first year. For more information about your subscription options [contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2). {% endcallout %}
+
 ##iCredits
 -----
 iCredits are the common currency in which BaseSpace Sequence Hub services are priced. iCredits cannot be purchased in advance.
 
-Free Trial accounts and new Professional or Enterprise subscription accounts are granted 250 iCredits that can be used to pay for compute, storage, and third-party apps. Free Trial iCredits expire after 30 days.
+Free Trial accounts and new Professional or Enterprise subscription accounts using the pay-as-you-go option are granted 250 iCredits that can be used to pay for compute, storage, and third-party apps. Free Trial iCredits expire after 30 days.
 
-Once these promotional iCredits are used, Professional and Enterprise accounts accrue charges in iCredits for storage, compute, and third-party app fees. Usage is invoiced monthly. See [iCredit Currency Conversion](#icredit-conversion) for local currency conversion rates, or [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information.  
+Once these promotional iCredits are used, Professional and Enterprise accounts accrue charges in iCredits for storage, compute, and third-party app fees. Usage is invoiced monthly. See [iCredit Currency Conversion](#icredit-conversion) for local currency conversion rates, or [contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) for more information.  
 
 Promotional and subscription iCredit charges are rounded up to the nearest iCredit. The BaseSpace Sequence Hub dashboard displays your current iCredit usage.
-
-
- <table class="table table-bordered" width ="75%">
+ <table class="table table-bordered" width="75%">
+            <col />
             <col />
             <col />
             <col />
@@ -29,6 +30,7 @@ Promotional and subscription iCredit charges are rounded up to the nearest iCred
                 <th style="text-align: center;">Basic</th>
                 <th style="text-align: center;">Professional</th>
                 <th style="text-align: center;">Enterprise</th>
+                <th style="text-align: center;">Pro/Enterprise <br />First-Year Fixed Price<sup>5</sup></th>
             </tr>
             <tr>
                 <td>Included Storage</td>
@@ -36,6 +38,7 @@ Promotional and subscription iCredit charges are rounded up to the nearest iCred
                 <td style="text-align: center;">1 TB<sup>1</sup></td>
                 <td style="text-align: center;">1 TB</td>
                 <td style="text-align: center;">1 TB</td>
+                <td style="vertical-align: middle;text-align: center;" rowspan="3">Unlimited</td>
             </tr>
             <tr>
                 <td>Additional Storage</td>
@@ -57,6 +60,7 @@ Promotional and subscription iCredit charges are rounded up to the nearest iCred
                 <td style="text-align: center;">Yes<sup>1</sup></td>
                 <td style="text-align: center;">Yes</td>
                 <td style="text-align: center;">Yes</td>
+                <td style="vertical-align: middle;text-align: center;"  rowspan="2">Unlimited</td>
             </tr>
             <tr>
                 <td>Paid Apps<sup>2</sup></td>
@@ -73,9 +77,11 @@ Promotional and subscription iCredit charges are rounded up to the nearest iCred
 <p><small><sup>2</sup> If an app terminates due to a BaseSpace Sequence Hub error, fees associated with the terminated run are not charged; if the app is terminated by a user, fees associated with the terminated run are applied.</small><p>
 
 
-<p><small><sup>3</sup> Free trial iCredits expire after 30 days. To add iCredits after the trial period has expired, [Contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) about upgrading to a Professional or Enterprise account.  </small><p>
+<p><small><sup>3</sup> Free trial iCredits expire after 30 days. To add iCredits after the trial period has expired, [contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2) about upgrading to a Professional or Enterprise account.  </small><p>
 
 <p><small><sup>4</sup> Professional and Enterprise subscription accounts are billed monthly. Promotional iCredits are valid as long as the subscription is current; subscription renewals are not granted additional iCredits. Promotional and billable iCredit usage is reflected in the dashboard and the monthly invoice.</small><p>
+
+<p><small><sup>5</sup> New Professional and Enterprise subscriptions can opt for a fixed-price subscription plan for their first year.  After the first year, the subscription plans use the pay-as-you-go model for storage and compute charges.  For more information about your subscription options, [contact your sales representative]( http://www.illumina.com/forms/contact_request.html?mktofrm=GM-Informatics-Basespace-Website-Contact-Question-2.0-Responsive&sciid=2016019IBN2). </small><p>
 
 ###iCredit Usage
 
