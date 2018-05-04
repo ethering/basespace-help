@@ -894,7 +894,8 @@ Please contact our support team if needed.
 In July 2017, BaseSpace Sequence Hub launched its v2 API. 
 AppResults and Samples that were created with the v1 API are transparently exposed as v2 Datasets and BioSamples, which can then be augmented with some new metadata, attributes, etc.
 
-In order to use the v2 API with BaseMout you can launch:
+In order to use the v2 API with BaseMount you can launch:
+
    `basemount --use-v2-api`
 
 
