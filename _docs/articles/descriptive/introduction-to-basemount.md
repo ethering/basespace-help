@@ -13,10 +13,13 @@ title: Introduction To BaseMount
  - [Installation](#Installation)
  - [Using BaseMount](#Mounting)
     - [Mounting, Authenticating, Unmounting](#Mounting)
+       - [Authenticating with Workgroups](#AuthenticationWorkgroups)
+       - [Authenticating with Entreprise domains, EU servers, Onsite BSMS](#AuthenticationEntrepriseDomains)
     - [Directory Structure](#DirectoryStructure)
     - [Downloading Data](#DownloadingData)
     - [Writing and Uploading data](#WriteMode)
     - [Deleting data](#DeletingData)
+ - [BaseMount with v2 API](#BasemountV2)
  - [The basemount-cmd tool](#BasemountCmd)
  - [Appendix 1: BSFS plugin](#AppendixBsfsPlugin)
  - [Troubleshooting](#Troubleshooting)
@@ -362,27 +365,49 @@ To run BaseMount inside a docker container, the container must run in privileged
 Note: If you need a more secure alternative to `docker run --privileged`, you may look around `docker run --cap-add SYS_ADMIN --device /dev/fuse --security-opt apparmor:unconfined` (but please don't ask us for any help with this obscure thing).
 
 
-### Mounting a BaseSpace Sequence Hub Onsite System
-
-BaseMount can also be used to mount user account data for BaseSpace Sequence Hub Onsite.  
-This is supported starting with BaseSpace Sequence Hub Onsite 2.1.  
-
-In order to mount your account data, you must use an additional command-line parameter `--api-server`.  
-This will direct BaseMount to connect via the API URL of the BaseSpace Onsite system.  
-
-    basemount [--config <config name>] --api-server <API URL> <mount-point folder>
-
-The API URL follows the format `http://{BaseSpace-IP-Address}:8080` for BaseSpace Onsite.
-
-Once authenticated, BaseMount will remember the API server URL for all subsequent accesses.
-
-
 
 <a name="Authentication"></a>
 
 ## Authentication
 
 The first time you run BaseMount, you will be directed to a web URL and asked to enter your BaseSpace Sequence Hub user credentials. BaseMount will use these credentials to authenticate your interactions with BaseSpace Sequence Hub. By default, the credentials are cached in your home directory and they can be password-encrypted for security, just like an ssh key.
+
+
+<a name="AuthenticationWorkgroups"></a>
+
+### Authenticating for Workgroups
+
+Workgroups are considered to be distinct accounts inside BaseSpace Sequence Hub. 
+Therefore, if your browser is set to use a specific workgroup when you open the CLI authentication link, the generated access token will give you access to this workgroup data in the CLI. 
+
+You cannot "switch workgroups" inside a BaseMount mount, but you can create multiple "BaseMount configs" that will point to different workgroups or to your "Personal" space (see `basemount --config <config name>`), and you can mount all of them simultaneously on different mount points.
+
+
+<a name="AuthenticationEntrepriseDomains"></a>
+
+### Authenticating for Entreprise domains, EU servers, Onsite BSMS
+
+    basemount [--config <config name>] --api-server <API URL or alias | help> <mount-point>
+
+Similarly to Workgroups, accessing Entreprise domains, EU servers or onsite BSMS (BaseSpace Managed Solution) will lead you to use BaseMount's `--config` feature as you will usually deal with multiple accounts.
+
+You will also need to use an additional command-line parameter: `--api-server <API URL or alias>`.  
+The API URL to pass there may be difficult to figure out. Here are some example to help you guess you own:
+
+  - `--api-server=https://api.basespace.illumina.com/` (Default US server)
+  - `--api-server=https://api.euc1.sh.basespace.illumina.com/` (EU server)
+  - `--api-server=https://api.cloud-hoth.illumina.com/` (Staging dev server)
+
+You can also run `basemount --api-server help` to get a list of known servers and their aliases.
+
+
+Note that for Entreprise domains, the API URL shouldn't actually include the subdomain name. However, it is really important that your browser is logged in to your subdomain before authenticating BaseMount. For example if you are a European customer with an Entreprise subdomain, your API URL will likely be `https://api.euc1.sh.basespace.illumina.com/` (no subdomain specified), but your browser must be showing the URL `https://MY_SUB_DOMAIN.euc1.sh.basespace.illumina.com`. If you type this URL while being logged in under the base BaseSpace domain, your browser will mistakenly redirect you outside your entreprise domain. You need to explicitely log out and re-enter the correct subdomain URL before logging in.
+
+
+If you really can't identify your API URL, you can find it by opening your entreprise basespace website in the Chrome browser, open the Developer Tools (Ctrl+Shift+I), select the Network tab, click on the XHR request type, reload the page (Ctrl+R) and look at the logged entries. Most of these entries will show the API URL. Make sure you include the https:// part of it.
+
+
+Once authenticated, BaseMount will store the API server URL for all subsequent mounts using this config.
 
 
 
@@ -395,13 +420,16 @@ Stopping BaseMount can be done in one of the following ways:
  - `basemount --unmount <mount point>` (this actually just calls the fusermount line below)
  - `basemount <mount point or subdirectory>` (same as above, after detecting that it refers to a mounted directory)
  - `fusermount -u <mount point>`
- - `echo unmount > <mount point>/.commands` (brutal method, which kills BaseMount from within)
 
 These unmount commands only succeed when all processes have stopped using the mounted filesystem. You also need to `cd` out of the filesystem's subdirectories in all your terminals.
 
-In some circumstances, lazy unmount using `fusermount -uz <mount point>` may be useful.
+In some circumstances, you may want to force it
 
-You can list the currently mounted directories using `mount | grep basemount`.
+ - `echo unmount > <mount point>/.commands` (brutal method, which kills BaseMount from within)
+ - `fusermount -uz <mount point>`: lazy unmount, which leaves the basemount process running but frees the mount point
+
+
+Note: You can list the currently mounted directories using `mount | grep basemount`.
 
 
 
@@ -424,6 +452,7 @@ A mount point's root directory contains the following entries:
 
  - **Runs**      : sub-directory containing the runs to which the user has access
  - **Projects**  : sub-directory containing the projects
+ - **BioSamples**: (v2 only)
  - **.Trash**    : sub-directory containing the user's trash
  - **README**
  - **.basemount**: special directory, which shows and controls the configuration of the current BaseMount instance. This directory is accessible from anywhere in the BaseMount filesystem (even though we make it visible by `ls` only at the top level).
@@ -433,52 +462,60 @@ A mount point's root directory contains the following entries:
 ![Root](/images/articles/tree-root.png)
 
 
-### Entity lists directories
-
-These directories are:
-
- - {mount-point}/**Projects**
- - {mount-point}/**Runs**
- - {mount-point}/Project/{project-name}/**AppResults**
- - {mount-point}/Project/{project-name}/**AppSessions**
- - {mount-point}/Project/{project-name}/**Samples**
-
-Inside these directories, each BaseSpace Sequence Hub entity is represented as a sub-directory with the corresponding name.
-
-Entities can also be accessed by ID via the symbolic links `.id.{entity-id} -> {entity-name}`.
-
-With the appropriate access token and permissions, you may be able to create entities with the `mkdir` command.
-
-
 ### Entity directories
 
 These directories are:
 
- - {mount-point}/**Projects/{project-name}**
- - {mount-point}/**Runs/{run-name}**
- - {mount-point}/Project/{project-name}/**AppResults/{appresult-name}**
- - {mount-point}/Project/{project-name}/**AppSessions/{appsession-name}**
- - {mount-point}/Project/{project-name}/**Samples/{sample-name}**
+ - {mount-point}/**Projects**
+ - {mount-point}/Projects/{project-name}/**AppResults**
+ - {mount-point}/Projects/{project-name}/**AppSessions**
+ - {mount-point}/Projects/{project-name}/**Samples**
+ - {mount-point}/Projects/{project-name}/**Datasets** (v2 only)
+ - {mount-point}/**Runs**
+ - {mount-point}/**BioSamples** (v2 only)
+ - {mount-point}/**BioSamples/{biosample-name}/Libraries** (v2 only)
+ - {mount-point}/**BioSamples/{biosample-name}/Libraries/{library-name}/LibraryPrep** (v2 only)
+ - {mount-point}/**BioSamples/{biosample-name}/PrepRequests** (v2 only)
+ - {mount-point}/**BioSamples/{biosample-name}/RunLaneSummaries** (v2 only)
+ - {mount-point}/**BioSamples/{biosample-name}/LabRequeues** (v2 only)
+ - {mount-point}/**BioSamples/{biosample-name}/Datasets** (v2 only)
 
-These directories all contain a Properties directory described later.
+Inside these directories, each BaseSpace Sequence Hub entity is represented as a sub-directory with the corresponding name.
+
+Entities can be accessed by name or by ID via the symbolic links `.id.{entity-id} -> {entity-name}`.
+
+With the appropriate access token and permissions, you should be able to create most entities with the `mkdir` command and delete them with `rmdir`.
 
 #### Entities of type Project
 
-Entities of type Project contain project sub-entities:
+Projects are the top-level container for most data, and they are used for sharing/transferring data.
+
+Entities of type Project contain:
+
+ - **AppSessions**, a.k.a. "Analyses" on the BaseSpace Sequence Hub website: list of all appsessions started in or written to this project.
+ - **AppResults**: app outputs (with output files) associated with the project. This is a flattened list, not broken down by analysis.  
+ - **Samples**: flattened list of Samples that are in the project and will have a Files directory containing your fastq.gz files.
+ - **Datasets**: (v2 only) When using the V2 API, AppResults and Samples are converted to Datasets.
 
 ![Project Detail](/images/articles/tree-project.png)
 
- - **AppSessions**, aka "Analyses" on the BaseSpace Sequence Hub website: list of all appsessions started in or written to this project.
- - **AppResults**: app outputs (with output files) associated with the project. This is a flattened out list, not broken down by analysis.  
- - **Samples**: flattened list of Samples that are in the project and will have a Files directory containing your fastq.gz files.
-
 #### Entities of type AppSession
 
-These contain:
+AppSessions, also known as Analyses, are created when users launch Apps. They record the metadata of which App was launched, who launched it, the date/time of the launch, the input settings to the App, and the output AppResults (when using v1 API) or Datasets (when using v2 API).
+
+Entities of type AppSession contain:
 
  - one sub-directory per appresult or sample generated during the appsession
  - one sub-directory per child appsession for multi-node appsessions
  - when generated by the app: a Logs subdirectory containing log files
+
+
+Experimental: Two hidden files can be used to relaunch the app:
+ - **LaunchPayload**: The payload that was used to launch the current appsession
+ - **Application/.AppLauncher**: A symlink to the *Application* that was used to launch the app, and the *.AppLauncher* special file which, when written to, initiates a new app launch. Furthermore, a subsequent read of this file (`cat Application/.AppLauncher`) will show you the launch API response.
+
+These two files can be made visible with `basemount-cmd show-launch-files`.
+A shortcut to relaunch the app is `basemount-cmd relaunch`.
 
 
 #### Entities of type AppResult
@@ -490,8 +527,7 @@ These contain:
 
 These directories are described in more details in the "Download" and "Upload" sections below.
 
-If the entity was created with `mkdir`, it would first appear in write mode, makign it possible to copy files to the Files directory. Once this is done, you can mark the entity as Complete with the command `basemount-cmd mark-as-complete`.
-
+If the entity was created with `mkdir`, it would first appear in write mode, making it possible to copy files to the Files directory. Once this is done, you can mark the entity as Complete with the command `basemount-cmd mark-as-complete`.
 
 #### Entities of type Sample
 
@@ -501,9 +537,71 @@ These contain:
  - **Files.metadata** (described below)
  - **SampleProperties**: Information extracted from .json
 
-These directories are described in more details in the "Download" section below. (BaseMount doesn't support sample creation for the moment, as they need to go through a validation stage).
+These directories are described in more details in the "Download" section. (BaseMount doesn't support sample creation for the moment, as they need to go through a validation stage).
 
+#### Entities of type Dataset (v2 only)
 
+Datasets are the containers for Files in BSSH. All files are stored in Datasets except Run files and Analysis log files. Each Dataset is stored in one Project.
+
+These contain:
+
+ - **Files**: as the name suggests...
+ - **Files.metadata** (described below)
+ - **DatasetTypeId**: Identifier
+ - **Attributes**: Read-only key-value pairs specific to each dataset type
+
+#### Entities of type BioSample (v2 only)
+
+Biosamples are a central reference entity in BSSH API v2. They are typically the starting point in an overall workflow of sequencing and analysis. 
+Biosamples are biological samples that usually contains purified or un-purified nucleic acid. They are usually a sample from an individual, microbial strain, or mixture of individuals such as a soil sample. Other examples include a blood sample, saliva, a tumor biopsy, and purified DNA or RNA. 
+Biosamples are the source material for creating Libraries, and a Biosample may have one or more Libraries. Each Library may have one or more FASTQ datasets, each of which are a product of sequencing a Library from the Biosample. 
+Biosamples may have Prep Requests, which are requests to the lab for a specific yield of sequencing data. 
+Datasets may be associated with a Biosample. These associations make it possible to view all data associated with a Biosample, such as on the Datasets tab of the Biosample Details page. 
+Biosamples in BSSH do not contain files and are not stored in a Project (i.e. Biosamples are 'metadata-only'). However, they have a 'default Project' where new datasets are stored by default when using the Biosample manifest.
+
+ - **Datasets**
+ - **AppSessions**
+ - **Libraries**
+ - **LabRequeues**
+ - **PreRequests**
+ - **RunLaneSummaries**
+ - **Status** (file)
+ - **DefaultProject**
+
+#### Entities of type Library (v2 only)
+
+Libraries correspond to the physical libraries created in a lab. Libraries are prepared from a Biosample using a Library Prep Kit. Each Library is associated with one Biosample.
+
+When a Library is sequenced on a Lane of a Run, the result is a FASTQ dataset. A Library may have multiple FASTQ datasets, which is the result of sequencing the Library on multiple Lanes and/or Runs. 
+
+Multiple Libraries that have indexes can be combined in a Pool. A Library may be present in multiple Pools.
+
+These contain references to:
+
+ - **BioSample**
+ - **LibraryPrep** 
+ - **Project**
+
+#### Entities of type PrepRequest (v2 only)
+
+The PrepRequest entity represents a request to create libraries of a given type (represented by a LibraryPrep entity which denotes the prep kit or protocol used to create libraries) for a given BioSample. A single BioSample may have multiple active PrepRequest entities (to support cases like Moleculo), but most BioSamples will only have a single active PrepRequest which is considered the default library type for the BioSample in auto-app launch scenarios.
+
+PrepRequest entities are created and associated with BioSamples during sample manifest upload (if the sample library prep is specified in the manifest), via the API/UI, or by interactions with LIMS.
+
+The PrepRequest entity contains the following fields:
+
+ - Id
+ - State - Active or Cancelled
+ - BioSample (via SampleSourceId) - Links to the owning BioSample
+ - LibraryPrep - The type of library prep kit (or protocol) that is being requested
+
+#### Entities of type LabRequeue (v2 only)
+
+Lab Requeues are requests to the lab for additional sequencing data. They are requested once initial sequencing of a Biosample has not generated sufficient yield for a good Analysis. A typical example is when a Prep Request enters 'Missing Yield' status, so a Lab Requeue is requested.
+
+#### Entities of type RunLaneSummary (v2 only)
+
+No description yet. You can enjoy parsing the .json file of your entities.
 
 ### BaseMount metadata files
 
@@ -511,11 +609,16 @@ In each directory, BaseMount provides a number of hidden files with extra BaseSp
 
 These metadata files are:
 
- - **.href**: the API entry point used to query this directory's contents
- - **.curl**: the API request, which could be used in standalone scripts
- - **.json**: the result of the BaseSpace Sequence Hub API query. This includes metadata associated with the relevant BaseSpace Sequence Hub entity. For example a sample's metadata includes the number and length of reads, the number of reads passing filter, etc.
- - **.id**  : the id of the basespace entity, if it exists, extracted from .href
- - **.type**: the entity (or group thereof)'s type, extracted from .href
+ - **.href**  : the API entry point used to query this directory's contents
+ - **.curl**  : the API request, which could be used in standalone scripts
+ - **.json**  : the result of the BaseSpace Sequence Hub API query. This includes metadata associated with the relevant BaseSpace Sequence Hub entity. For example a sample's metadata includes the number and length of reads, the number of reads passing filter, etc.
+ - **.id**    : the id of the basespace entity, if it exists, extracted from .href
+ - **.type**  : the entity (or group thereof)'s type, extracted from .href
+ - **.name**  : the Name field of the current entity (when available from the json response)
+ - **.status**: the Status field of the current entity (when available from the json response). Note that this file is never updated unless you run `basemount-cmd refresh`. Some entities also have a "Status" file that is more dynamically updated and is sometimes writeable.
+
+
+Several entities also store metadata as properties. These are available in the Properties sub-directory.
 
 
 
@@ -784,6 +887,20 @@ Please contact our support team if needed.
 
 
 
+<a name="BasemountV2"></a>
+
+## BaseMount with v2 API
+
+In July 2017, BaseSpace Sequence Hub launched its v2 API. 
+AppResults and Samples that were created with the v1 API are transparently exposed as v2 Datasets and BioSamples, which can then be augmented with some new metadata, attributes, etc.
+
+In order to use the v2 API, your BSSH account first needs to be "v2-activated" by an Illumina engineer.
+
+You can then launch:
+   `basemount --use-v2-api`
+
+
+
 <a name="BasemountCmd"></a>
 
 ## The basemount-cmd tool
@@ -827,7 +944,16 @@ Running `basemount-cmd` without arguments also shows a description for each comm
    *Available in: .Trash/{entity-name} directories*
 
  - **mark-as-complete**: Finalize and switch (sample or appresult) to read-only. Change the state of the associated appsession to Complete  
-   *Available in: sample and appresult entities*
+   *Available in: sample, appresult and appsession entities*
+
+ - **rename-appsession**: Rename appsession associated to the appresult  
+   *Available in: appresult entities*
+
+ - **relaunch**: Relaunch current appsession by running the equivalent of `cat LaunchPayload > Application/.AppLauncher` (see show-launch-files below)
+   *Available in: appsession entities*
+
+ - **show-launch-files**: Expose LaunchPayload and LaunchApp files
+   *Available in: appsession entities*
 
  - **unmount**: Force unmount. Warning: the current directory will become invalid  
    *Available in: top level directory*
@@ -986,7 +1112,7 @@ The default configuration used by BaseSpace Sequence Hub Native Apps running on 
 	numberOfBlocksToPurgeOnCacheFull = 20
 
 
-These lines should be added to the end of the config file `/home/user/.basemount/default.cfg` (Note: replace "default" by the basemount config name you wish to configure).
+These lines should be added to the end of the config file `/home/user/.basespace/default.cfg` (Note: replace "default" by the basemount config name you wish to configure).
 
 
 
@@ -1041,7 +1167,7 @@ If your connection is slower than that, two BaseMount options may help address t
 By default, n=8, so `--threads=2` may help.
 
 But... in many settings, download speed is improved by using multiple threads.
-In this case, Reducing the size of each downloaded block to something smaller than 16MB may be a good option:
+In this case, reducing the size of each downloaded block to something smaller than 16MB may be a good option:
 
  -  `--cache-opts=<interactive block size>:<large block size>:<total cache size>`
 
@@ -1061,7 +1187,7 @@ A middle ground can be achieved with both options: `--threads=4 --cache-opt=2:8:
 
 ### How can I refresh the contents of BaseMount's directories?
 
-You can run:
+You can run either:
 
 - `basemount-cmd refresh`
 - echo refresh > .commands
